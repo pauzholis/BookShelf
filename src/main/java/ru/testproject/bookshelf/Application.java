@@ -1,4 +1,4 @@
-package ru.pauzholis.bookshelf;
+package ru.testproject.bookshelf;
 
 
 import org.springframework.boot.SpringApplication;

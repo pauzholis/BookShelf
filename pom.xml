@@ -10,7 +10,7 @@
         <version>1.3.2.RELEASE</version>
     </parent>
 
-    <groupId>ru.pauzholis</groupId>
+    <groupId>ru.testproject</groupId>
     <artifactId>BookShelf</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 

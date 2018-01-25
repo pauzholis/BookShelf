@@ -5,14 +5,14 @@ CREATE TABLE book (
   shelf_id    INT UNSIGNED
   COMMENT 'Идентификатор полки',
   user_id     INT UNSIGNED NOT NULL
-  COMMENT 'Идентификатор пользователя',
+  COMMENT 'Идентификатор пользователя дающего доступ',
   file_path   VARCHAR(255) NOT NULL
   COMMENT 'Путь сохранения книги',
   name        VARCHAR(255) NOT NULL
   COMMENT 'Название книги',
   author      VARCHAR(255) NOT NULL
   COMMENT 'Автор книги',
-  description VARCHAR(1000)
+  description LONGTEXT
   COMMENT 'Описание книги',
   isbn        NUMERIC(13)  NOT NULL
   COMMENT 'ISBN книги'
@@ -23,7 +23,7 @@ CREATE TABLE shelf (
   COMMENT 'Идентификатор полки',
   name        VARCHAR(255) NOT NULL
   COMMENT 'Название полки',
-  describtion VARCHAR(255) NOT NULL
+  description LONGTEXT NOT NULL
   COMMENT 'Описание полки'
 );
 -- Таблица пользователей
@@ -39,23 +39,30 @@ CREATE TABLE user (
 );
 
 CREATE TABLE page (
+  id      INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
+  COMMENT 'Идентификатор страницы',
   book_id INT UNSIGNED NOT NULL
   COMMENT 'Идентификатор книги',
   number  INT UNSIGNED NOT NULL
   COMMENT 'Номер страницы',
   content LONGTEXT     NOT NULL
-  COMMENT 'Содержимое страницы',
-  current INT UNSIGNED NOT NULL
-  COMMENT 'Текущая страница'
+  COMMENT 'Содержимое страницы'
+);
+
+CREATE TABLE current_page (
+  user_id INT UNSIGNED UNIQUE NOT NULL
+  COMMENT 'Идентификатор пользователя',
+  page_id INT UNSIGNED UNIQUE NOT NULL
+  COMMENT 'Идентификатор страницы текущей страницы'
 );
 
 CREATE TABLE access_rights (
-  book_id     INT UNSIGNED NOT NULL
+  book_id     INT UNSIGNED NOT NULL UNIQUE
   COMMENT 'Идентификатор книги',
-  user_id     INT UNSIGNED NOT NULL
+  user_id     INT UNSIGNED NOT NULL UNIQUE
   COMMENT 'Идентификатор пользователя',
-  acrive_date DATE         NOT NULL
-  COMMENT 'Дата окончания действия права достпуа к книге'
+  active_date DATE         NOT NULL
+  COMMENT 'Дата окончания действия права доступа к книге'
 );
 
 CREATE TABLE user_activation (
@@ -64,8 +71,8 @@ CREATE TABLE user_activation (
   hash        VARCHAR(255) NOT NULL
   COMMENT 'Строка активации пользователя',
   create_date DATE         NOT NULL
-  COMMENT 'Дата создания учетной записи',
-  active_date DATE         NOT NULL
+  COMMENT 'Дата создания строки активации',
+  active_date DATE
   COMMENT 'Дата активации учетной записи'
 );
 
@@ -81,15 +88,15 @@ CREATE TABLE access_request (
 );
 
 CREATE TABLE notification (
-  channel     ENUM ('EMAIL') NOT NULL
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
+  COMMENT 'Идентификатор сообщения',
+  channel     ENUM ('EMAIL')
   COMMENT 'Канал для отправки сообщения',
-  create_date DATE           NOT NULL
-  COMMENT 'Дата отправки сообoения',
-  active_date DATE           NOT NULL
-  COMMENT 'Дата активации',
-  adress      VARCHAR(255)   NOT NULL
+  create_date DATE
+  COMMENT 'Дата отправки сообщения',
+  adress      VARCHAR(255)
   COMMENT 'Адресс электронной почты',
-  massage     VARCHAR(255)   NOT NULL
+  massage     VARCHAR(255)
   COMMENT 'Сообщение активации учетной записи'
 );
 
@@ -161,5 +168,13 @@ ALTER TABLE access_request
   ON UPDATE CASCADE;
 ALTER TABLE access_response
   ADD FOREIGN KEY (request_id) REFERENCES access_request (id)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+ALTER TABLE current_page
+  ADD FOREIGN KEY (user_id) REFERENCES user (id)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+ALTER TABLE current_page
+  ADD FOREIGN KEY (page_id) REFERENCES page (id)
   ON DELETE CASCADE
   ON UPDATE CASCADE;
