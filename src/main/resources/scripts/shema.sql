@@ -71,7 +71,7 @@ CREATE TABLE user_activation (
 
 CREATE TABLE access_request (
   id      INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
-  COMMENT 'Идентификатор запроса'
+  COMMENT 'Идентификатор запроса',
   book_id INT UNSIGNED NOT NULL
   COMMENT 'Идентификатор книги',
   user_id INT UNSIGNED NOT NULL
@@ -94,11 +94,11 @@ CREATE TABLE notification (
 );
 
 CREATE TABLE access_response (
-  request_id INT UNSIGNED NOT NULL
+  request_id       INT UNSIGNED NOT NULL
   COMMENT 'Идентификатор запроса',
   response_massage VARCHAR(255)
   COMMENT 'Ответное сообщение',
-  approved BOOLEAN NOT NULL
+  approved         BOOLEAN      NOT NULL
   COMMENT 'Статус одобрения'
 );
 
@@ -129,5 +129,37 @@ ALTER TABLE book
   ON UPDATE CASCADE;
 ALTER TABLE book
   ADD FOREIGN KEY (user_id) REFERENCES USER (id)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+ALTER TABLE page
+  ADD FOREIGN KEY (book_id) REFERENCES book (id)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+ALTER TABLE book
+  ADD FOREIGN KEY (shelf_id) REFERENCES shelf (id)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+ALTER TABLE access_rights
+  ADD FOREIGN KEY (book_id) REFERENCES book (id)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+ALTER TABLE access_rights
+  ADD FOREIGN KEY (user_id) REFERENCES user (id)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+ALTER TABLE user_activation
+  ADD FOREIGN KEY (user_id) REFERENCES user (id)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+ALTER TABLE access_request
+  ADD FOREIGN KEY (book_id) REFERENCES book (id)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+ALTER TABLE access_request
+  ADD FOREIGN KEY (user_id) REFERENCES user (id)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+ALTER TABLE access_response
+  ADD FOREIGN KEY (request_id) REFERENCES access_request (id)
   ON DELETE CASCADE
   ON UPDATE CASCADE;
