@@ -118,18 +118,17 @@ INSERT INTO current_page (user_id, page_id) VALUES (2, 2);
 INSERT INTO access_rights (book_id, user_id, active_date) VALUES (1, 1, '25-01-18');
 INSERT INTO access_rights (book_id, user_id, active_date) VALUES (2, 2, '24-01-18');
 
-INSERT INTO user_activation (user_id, hash, create_date, active_date) VALUES (1, '5358em5264en5734a@5123ai5076.r5499',
-                                                                              '25-01-17', '26-01-17');
-INSERT INTO user_activation (user_id, hash, create_date, active_date) VALUES (2,
-                                                                              '5264au5734ho5076is3008gm4559il2162co5123',
-                                                                              '23-01-17', '25-01-17');
+INSERT INTO user_activation (user_id, hash, active_date) VALUES (1, '5358em5264en5734a@5123ai5076.r5499', '26-01-17');
+INSERT INTO user_activation (user_id, hash, active_date) VALUES (2,
+                                                                 '5264au5734ho5076is3008gm4559il2162co5123',
+                                                                 '25-01-17');
 
 INSERT INTO access_request (book_id, user_id, massage)
 VALUES (1, 2, 'Прошу Вас предоставить мне доступ к данной книге');
 INSERT INTO access_request (book_id, user_id, massage)
 VALUES (2, 1, 'Прошу Вас предоставить мне доступ к данной книге');
 
-INSERT INTO notification (channel, create_date, adress, massage) VALUES ('EMAIL', NULL, NULL, NULL);
+INSERT INTO notification (channel, active_date, adress, massage) VALUES ('EMAIL', NULL, NULL, NULL);
 
 INSERT INTO access_response (request_id, response_massage, approved) VALUES (1, 'Доступ разрешен', TRUE);
 INSERT INTO access_response (request_id, response_massage, approved) VALUES (2, 'Доступ запрещен', FALSE);

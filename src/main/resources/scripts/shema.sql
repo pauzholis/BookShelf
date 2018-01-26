@@ -70,8 +70,6 @@ CREATE TABLE user_activation (
   COMMENT 'Идентификатор пользователя',
   hash        VARCHAR(255) NOT NULL
   COMMENT 'Строка активации пользователя',
-  create_date DATE         NOT NULL
-  COMMENT 'Дата создания строки активации',
   active_date DATE
   COMMENT 'Дата активации учетной записи'
 );
@@ -92,8 +90,8 @@ CREATE TABLE notification (
   COMMENT 'Идентификатор сообщения',
   channel     ENUM ('EMAIL')
   COMMENT 'Канал для отправки сообщения',
-  create_date DATE
-  COMMENT 'Дата отправки сообщения',
+  active_date DATE
+  COMMENT 'Дата активации сообщения',
   adress      VARCHAR(255)
   COMMENT 'Адресс электронной почты',
   massage     VARCHAR(255)

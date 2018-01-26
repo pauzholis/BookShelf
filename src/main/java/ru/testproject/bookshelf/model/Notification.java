@@ -17,7 +17,7 @@ public class Notification {
     private Channel channel;
 
     /**
-     * Дата отправки сообщения
+     * Дата активации сообщения
      */
     private Date date;
 
