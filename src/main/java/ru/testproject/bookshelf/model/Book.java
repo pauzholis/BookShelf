@@ -1,48 +1,74 @@
 package ru.testproject.bookshelf.model;
 
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Книга
  */
+@Entity
+@Table(name = "book")
 public class Book {
     /**
      * Идентификатор книги
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
 
     /**
      * Полка на которой стоит книга
      */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "shelf_id")
     private Shelf shelf;
 
     /**
      * Пользователь которому принадлежит книга
      */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 
     /**
      * Место расположения книги
      */
+    @Column(name = "file_path")
     private String filePath;
 
     /**
      * Название книги
      */
+    @Column(name = "name")
     private String name;
 
     /**
      * Автор книги
      */
+    @Column(name = "author")
     private String author;
 
     /**
      * Описание книги
      */
+    @Column(name = "description")
     private String description;
 
     /**
      * ISBN книги
      */
+    @Column(name = "isbn")
     private Long isbn;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Page> page = new HashSet<Page>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<AccessRights> accessRights = new HashSet<>();
+
+
 
     public Book() {
     }

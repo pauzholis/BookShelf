@@ -1,34 +1,46 @@
 package ru.testproject.bookshelf.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Сообщение пользователю
  */
+@Entity
+@Table(name = "notification")
 public class Notification {
     /**
      * Идентификатор сообщения
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
 
     /**
      * Канал, посредством которого осуществляется передача сообщения
      */
+    @Enumerated
+    @Column(name = "channel")
     private Channel channel;
 
     /**
      * Дата активации сообщения
      */
+    @Temporal(value = TemporalType.DATE)
+    @Column(name = "date")
     private Date date;
 
     /**
      * Адресс электронной почты
      */
+    @Column(name = "adress")
     private String adress;
 
     /**
      * Дата отправки сообщения
      */
+    @Column(name = "message")
     private String massage;
 
     public Notification() {

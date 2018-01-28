@@ -1,29 +1,43 @@
 package ru.testproject.bookshelf.model;
 
+import javax.persistence.*;
+
 /**
  * Страница
  */
+@Entity
+@Table(name = "page")
 public class Page {
-
     /**
      * Идентификатор страницы
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
 
     /**
      *Книга, которой принадлежит страница
      */
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "book_id")
     private Book book;
 
     /**
      * Номер страницы
      */
+    @Column(name = "number")
     private Integer number;
 
     /**
      * Содержимое страницы
      */
+    @Column(name = "content")
     private String content;
+
+    @ManyToOne
+    private User user;
+
 
     public Page() {
     }

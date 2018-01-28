@@ -1,23 +1,41 @@
 package ru.testproject.bookshelf.model;
 
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Полка
  */
+@Entity
+@Table(name = "shelf")
 public class Shelf {
     /**
      * Идентификатор полки
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
 
     /**
      * Название полки
      */
+    @Column(name = "name")
     private String name;
 
     /**
      * Описание полки
      */
+    @Column(name = "description")
     private String description;
+
+    /**
+     * Список кник входящих в состав данной полки
+     * */
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "bank", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Book> book = new HashSet<>();
+
 
     public Shelf() {
     }
