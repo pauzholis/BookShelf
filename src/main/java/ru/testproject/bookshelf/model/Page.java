@@ -3,7 +3,7 @@ package ru.testproject.bookshelf.model;
 import javax.persistence.*;
 
 /**
- * Страница
+ * Страница книги
  */
 @Entity
 @Table(name = "page")
@@ -17,7 +17,7 @@ public class Page {
     private Long id;
 
     /**
-     *Книга, которой принадлежит страница
+     * Книга, которой принадлежит страница
      */
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "book_id")
@@ -35,11 +35,19 @@ public class Page {
     @Column(name = "content")
     private String content;
 
+    /**
+     * Служебное поле hibernate
+     */
+    @Version
+    private Integer version;
+
     /** Пользователь просматривающий текущую страницу*/
     @ManyToMany()
     private User user;
 
-
+    /**
+     * Конструктор для hibernate
+     */
     public Page() {
     }
 
@@ -83,5 +91,13 @@ public class Page {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }

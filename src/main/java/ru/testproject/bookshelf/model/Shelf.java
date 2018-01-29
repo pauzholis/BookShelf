@@ -31,12 +31,20 @@ public class Shelf {
     private String description;
 
     /**
+     * Служебное поле hibernate
+     */
+    @Version
+    private Integer version;
+
+    /**
      * Список кник входящих в состав данной полки
-     * */
+     */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "bank", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Book> book = new HashSet<>();
 
-
+    /**
+     * Конструктор для hibernate
+     */
     public Shelf() {
     }
 
@@ -71,5 +79,13 @@ public class Shelf {
 
     public void setBook(Set<Book> book) {
         this.book = book;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }

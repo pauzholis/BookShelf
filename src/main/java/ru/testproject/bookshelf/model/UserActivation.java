@@ -29,6 +29,17 @@ public class UserActivation {
     @Temporal(value = TemporalType.DATE)
     private Date activeDate;
 
+    /**
+     * Служебное поле hibernate
+     */
+    @Version
+    private Integer version;
+
+    /**
+     * Конструктор для hibernate
+     */
+    public UserActivation(){}
+
     public UserActivation(User user, String hash, Date createDate, Date acriveDate) {
         this.user = user;
         this.hash = hash;
@@ -61,5 +72,13 @@ public class UserActivation {
 
     public void setActiveDate(Date activeDate) {
         this.activeDate = activeDate;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }

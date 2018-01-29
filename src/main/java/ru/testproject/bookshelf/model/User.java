@@ -37,25 +37,40 @@ public class User {
     private Boolean active;
 
     /**
+     * Служебное поле hibernate
+     */
+    @Version
+    private Integer version;
+
+    /**
      * Список книг пренадлежащих пользователю
-    * */
+     */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Book> book = new HashSet<>();
 
-    /** Список страниц*/
+    /**
+     * Список страниц
+     */
     @ManyToMany
     @JoinTable(name = "current_page", joinColumns = @JoinColumn (name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "page_id"))
     private Set<Page> page = new HashSet<>();
 
-    /** Список прав доступа*/
+    /**
+     *  Список прав доступа
+     */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AccessRights> accessRights = new HashSet<>();
 
-    /** Список ответов на запросы от других пользователей*/
+    /**
+     *  Список ответов на запросы от других пользователей
+     */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<AccessRequest>accessRequests = new HashSet<AccessRequest>();
+    private Set<AccessRequest>accessRequests = new HashSet<>();
 
+    /**
+     * Конструктор для hibernate
+     */
     public User() {
     }
 
@@ -123,5 +138,13 @@ public class User {
 
     public void setAccessRequests(Set<AccessRequest> accessRequests) {
         this.accessRequests = accessRequests;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }

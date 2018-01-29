@@ -1,4 +1,6 @@
+--
 -- Таблица книг
+--
 CREATE TABLE book (
   id          INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
   COMMENT 'Идентификатор книги',
@@ -15,18 +17,26 @@ CREATE TABLE book (
   description LONGTEXT
   COMMENT 'Описание книги',
   isbn        NUMERIC(13)  NOT NULL
-  COMMENT 'ISBN книги'
+  COMMENT 'ISBN книги',
+  version INTEGER NOT NULL
 );
+
+--
 -- Таблица полок
+--
 CREATE TABLE shelf (
   id          INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
   COMMENT 'Идентификатор полки',
   name        VARCHAR(255) NOT NULL
   COMMENT 'Название полки',
-  description LONGTEXT NOT NULL
+  description LONGTEXT NOT NULL,
+  version INTEGER NOT NULL
   COMMENT 'Описание полки'
 );
+
+--
 -- Таблица пользователей
+--
 CREATE TABLE user (
   id       INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
   COMMENT 'Идентификатор пользователя',
@@ -34,10 +44,14 @@ CREATE TABLE user (
   COMMENT 'email пользователя',
   password VARCHAR(255) NOT NULL
   COMMENT 'Пароль пользователя',
-  active   BOOLEAN      NOT NULL DEFAULT FALSE
+  active   BOOLEAN      NOT NULL DEFAULT FALSE,
+  version INTEGER NOT NULL
   COMMENT 'Статус регистрации'
 );
 
+--
+-- Таблица страниц книги
+--
 CREATE TABLE page (
   id      INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
   COMMENT 'Идентификатор страницы',
@@ -45,35 +59,51 @@ CREATE TABLE page (
   COMMENT 'Идентификатор книги',
   number  INT UNSIGNED NOT NULL
   COMMENT 'Номер страницы',
-  content LONGTEXT     NOT NULL
+  content LONGTEXT     NOT NULL,
+  version INTEGER NOT NULL
   COMMENT 'Содержимое страницы'
 );
 
+--
+-- Таблица текущих страниц
+--
 CREATE TABLE current_page (
   user_id INT UNSIGNED UNIQUE NOT NULL
   COMMENT 'Идентификатор пользователя',
-  page_id INT UNSIGNED UNIQUE NOT NULL
+  page_id INT UNSIGNED UNIQUE NOT NULL,
+  version INTEGER NOT NULL
   COMMENT 'Идентификатор страницы текущей страницы'
 );
 
+--
+-- Таблица право доступа
+--
 CREATE TABLE access_rights (
   book_id     INT UNSIGNED NOT NULL UNIQUE
   COMMENT 'Идентификатор книги',
   user_id     INT UNSIGNED NOT NULL UNIQUE
   COMMENT 'Идентификатор пользователя',
-  active_date DATE         NOT NULL
+  active_date DATE         NOT NULL,
+  version INTEGER NOT NULL
   COMMENT 'Дата окончания действия права доступа к книге'
 );
 
+--
+-- Таблица активации пользователей
+--
 CREATE TABLE user_activation (
   user_id     INT UNSIGNED NOT NULL
   COMMENT 'Идентификатор пользователя',
   hash        VARCHAR(255) NOT NULL
   COMMENT 'Строка активации пользователя',
-  active_date DATE
+  active_date DATE,
+  version INTEGER NOT NULL
   COMMENT 'Дата активации учетной записи'
 );
 
+--
+-- Таблица запросов доступа
+--
 CREATE TABLE access_request (
   id      INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
   COMMENT 'Идентификатор запроса',
@@ -81,10 +111,14 @@ CREATE TABLE access_request (
   COMMENT 'Идентификатор книги',
   user_id INT UNSIGNED NOT NULL
   COMMENT 'Идентификатор пользователя',
-  massage VARCHAR(255)
+  massage VARCHAR(255),
+  version INTEGER NOT NULL
   COMMENT 'Сообщение для запроса доступа'
 );
 
+--
+-- Таблица сообщений для активации профиля
+--
 CREATE TABLE notification (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
   COMMENT 'Идентификатор сообщения',
@@ -94,16 +128,21 @@ CREATE TABLE notification (
   COMMENT 'Дата активации сообщения',
   adress      VARCHAR(255)
   COMMENT 'Адресс электронной почты',
-  massage     VARCHAR(255)
+  massage     VARCHAR(255),
+  version INTEGER NOT NULL
   COMMENT 'Сообщение активации учетной записи'
 );
 
+--
+-- Таблица ответов на  запросы
+--
 CREATE TABLE access_response (
   request_id       INT UNSIGNED NOT NULL
   COMMENT 'Идентификатор запроса',
   response_massage VARCHAR(255)
   COMMENT 'Ответное сообщение',
-  approved         BOOLEAN      NOT NULL
+  approved         BOOLEAN      NOT NULL,
+  version INTEGER NOT NULL
   COMMENT 'Статус одобрения'
 );
 

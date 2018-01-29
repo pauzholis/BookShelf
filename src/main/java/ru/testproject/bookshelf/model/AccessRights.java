@@ -31,6 +31,15 @@ public class AccessRights {
     @Column(name = "active_date")
     private Date activeDate;
 
+    /**
+     * Служебное поле hibernate
+     */
+    @Version
+    private Integer version;
+
+    /**
+     * Конструктор для hibernate
+     */
     public AccessRights() {
     }
 
@@ -64,4 +73,11 @@ public class AccessRights {
         this.activeDate = activeDate;
     }
 
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
 }

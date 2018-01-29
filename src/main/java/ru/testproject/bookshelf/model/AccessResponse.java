@@ -27,6 +27,15 @@ public class AccessResponse {
     @Column(name = "approved")
     private Boolean approved;
 
+    /**
+     * Служебное поле hibernate
+     */
+    @Version
+    private Integer version;
+
+    /**
+     * Конструктор для hibernate
+     */
     public AccessResponse() {
     }
 
@@ -58,5 +67,13 @@ public class AccessResponse {
 
     public void setAccessRequest(AccessRequest accessRequest) {
         this.accessRequest = accessRequest;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }

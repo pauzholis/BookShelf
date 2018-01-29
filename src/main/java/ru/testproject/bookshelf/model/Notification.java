@@ -25,7 +25,7 @@ public class Notification {
     private Channel channel;
 
     /**
-     * Дата активации сообщения
+     * Дата окончания активности сообщения для отправки пользователю
      */
     @Temporal(value = TemporalType.DATE)
     @Column(name = "date")
@@ -43,6 +43,15 @@ public class Notification {
     @Column(name = "message")
     private String massage;
 
+    /**
+     * Служебное поле hibernate
+     */
+    @Version
+    private Integer version;
+
+    /**
+     * Конструктор для hibernate
+     */
     public Notification() {
     }
 
@@ -89,4 +98,11 @@ public class Notification {
         this.massage = massage;
     }
 
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
 }

@@ -19,14 +19,14 @@ public class AccessRequest {
     private Long id;
 
     /**
-     * Книга к которой запрашивается доступ
+     * Книга, к которой запрашивается доступ
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id")
     private Book book;
 
     /**
-     * Пользователь отправляющий запрос
+     * Пользователь, отправляющий запрос
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -39,11 +39,20 @@ public class AccessRequest {
     private String massage;
 
     /**
+     * Служебное поле hibernate
+     */
+    @Version
+    private Integer version;
+
+    /**
      * Список ответов на запросы
-     * */
+     */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AccessResponse> accessResponseSet = new HashSet<>();
 
+   /**
+    * Конструктор для hibernate
+    */
     public AccessRequest() {
     }
 
@@ -89,4 +98,13 @@ public class AccessRequest {
     public void setAccessResponseSet(Set<AccessResponse> accessResponseSet) {
         this.accessResponseSet = accessResponseSet;
     }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
 }

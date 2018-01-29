@@ -62,20 +62,33 @@ public class Book {
     @Column(name = "isbn")
     private Long isbn;
 
-    /** Список страниц*/
+    /**
+     * Служебное поле hibernate
+     */
+    @Version
+    private Integer version;
+
+    /**
+     * Список страниц
+     */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Page> page = new HashSet<Page>();
 
-    /** Список прав на чтение*/
+    /**
+     * Список прав на чтение
+     */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AccessRights> accessRights = new HashSet<>();
 
-    /** Список запросов на чтение от других пользователей*/
+    /**
+     * Список запросов на чтение от других пользователей
+     */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AccessRequest>accessRequests = new HashSet<>();
 
-
-
+    /**
+     * Конструктор для hibernate
+     */
     public Book() {
     }
 
@@ -173,5 +186,13 @@ public class Book {
 
     public void setAccessRequests(Set<AccessRequest> accessRequests) {
         this.accessRequests = accessRequests;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }
