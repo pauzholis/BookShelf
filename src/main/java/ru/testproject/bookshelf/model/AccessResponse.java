@@ -1,22 +1,30 @@
 package ru.testproject.bookshelf.model;
 
+import javax.persistence.*;
+
 /**
  * Ответ на запрос
  */
+@Entity
+@Table(name = "access_response")
 public class AccessResponse {
     /**
      * Запрос на который дается ответ
      */
+    @ManyToOne
+    @JoinColumn(name = "request_id")
     private AccessRequest accessRequest;
 
     /**
      * Текст ответа на запрос
      */
+    @Column(name = "massage")
     private String massage;
 
     /**
      * Статус одобрения запроса
      */
+    @Column(name = "approved")
     private Boolean approved;
 
     public AccessResponse() {
@@ -46,5 +54,9 @@ public class AccessResponse {
 
     public void setApproved(Boolean approved) {
         this.approved = approved;
+    }
+
+    public void setAccessRequest(AccessRequest accessRequest) {
+        this.accessRequest = accessRequest;
     }
 }

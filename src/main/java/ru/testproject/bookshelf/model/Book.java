@@ -62,11 +62,17 @@ public class Book {
     @Column(name = "isbn")
     private Long isbn;
 
+    /** Список страниц*/
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Page> page = new HashSet<Page>();
 
+    /** Список прав на чтение*/
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AccessRights> accessRights = new HashSet<>();
+
+    /** Список запросов на чтение от других пользователей*/
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<AccessRequest>accessRequests = new HashSet<>();
 
 
 
@@ -143,5 +149,29 @@ public class Book {
 
     public void setIsbn(Long isbn) {
         this.isbn = isbn;
+    }
+
+    public Set<Page> getPage() {
+        return page;
+    }
+
+    public void setPage(Set<Page> page) {
+        this.page = page;
+    }
+
+    public Set<AccessRights> getAccessRights() {
+        return accessRights;
+    }
+
+    public void setAccessRights(Set<AccessRights> accessRights) {
+        this.accessRights = accessRights;
+    }
+
+    public Set<AccessRequest> getAccessRequests() {
+        return accessRequests;
+    }
+
+    public void setAccessRequests(Set<AccessRequest> accessRequests) {
+        this.accessRequests = accessRequests;
     }
 }

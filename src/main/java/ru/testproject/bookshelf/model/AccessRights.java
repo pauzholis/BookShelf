@@ -2,8 +2,7 @@ package ru.testproject.bookshelf.model;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+
 
 /**
  * Права доступа
@@ -21,10 +20,9 @@ public class AccessRights {
     /**
      * Пользователь
      */
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "user_id")
-    private Set<User> user = new HashSet<>();
-
+    private User user;
 
     /**
      * Дата окончания действия права доступа к книге
@@ -36,7 +34,7 @@ public class AccessRights {
     public AccessRights() {
     }
 
-    public AccessRights(Book book, Set<User> user, Date activeDate) {
+    public AccessRights(Book book,User user, Date activeDate) {
         this.book = book;
         this.user = user;
         this.activeDate = activeDate;
@@ -46,7 +44,7 @@ public class AccessRights {
         return book;
     }
 
-    public Set<User> getUser() {
+    public User getUser() {
         return user;
     }
 
@@ -58,11 +56,12 @@ public class AccessRights {
         this.book = book;
     }
 
-    public void setUser(Set<User> user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
     public void setActiveDate(Date activeDate) {
         this.activeDate = activeDate;
     }
+
 }

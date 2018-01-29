@@ -42,16 +42,19 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Book> book = new HashSet<>();
 
-    @OneToMany
+    /** Список страниц*/
+    @ManyToMany
     @JoinTable(name = "current_page", joinColumns = @JoinColumn (name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "page_id"))
     private Set<Page> page = new HashSet<>();
 
-    @ManyToMany(mappedBy = "user")
+    /** Список прав доступа*/
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AccessRights> accessRights = new HashSet<>();
 
-
-
+    /** Список ответов на запросы от других пользователей*/
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<AccessRequest>accessRequests = new HashSet<AccessRequest>();
 
     public User() {
     }
@@ -88,5 +91,37 @@ public class User {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public Set<Book> getBook() {
+        return book;
+    }
+
+    public void setBook(Set<Book> book) {
+        this.book = book;
+    }
+
+    public Set<Page> getPage() {
+        return page;
+    }
+
+    public void setPage(Set<Page> page) {
+        this.page = page;
+    }
+
+    public Set<AccessRights> getAccessRights() {
+        return accessRights;
+    }
+
+    public void setAccessRights(Set<AccessRights> accessRights) {
+        this.accessRights = accessRights;
+    }
+
+    public Set<AccessRequest> getAccessRequests() {
+        return accessRequests;
+    }
+
+    public void setAccessRequests(Set<AccessRequest> accessRequests) {
+        this.accessRequests = accessRequests;
     }
 }

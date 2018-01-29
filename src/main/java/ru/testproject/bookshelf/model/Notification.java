@@ -88,4 +88,5 @@ public class Notification {
     public void setMassage(String massage) {
         this.massage = massage;
     }
+
 }

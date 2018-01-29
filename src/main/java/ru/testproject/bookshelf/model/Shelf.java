@@ -64,4 +64,12 @@ public class Shelf {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public Set<Book> getBook() {
+        return book;
+    }
+
+    public void setBook(Set<Book> book) {
+        this.book = book;
+    }
 }

@@ -58,4 +58,8 @@ public class UserActivation {
     public void setAtriveDate(Date acriveDate) {
         this.activeDate = acriveDate;
     }
+
+    public void setActiveDate(Date activeDate) {
+        this.activeDate = activeDate;
+    }
 }

@@ -35,7 +35,8 @@ public class Page {
     @Column(name = "content")
     private String content;
 
-    @ManyToOne
+    /** Пользователь просматривающий текущую страницу*/
+    @ManyToMany()
     private User user;
 
 
@@ -74,5 +75,13 @@ public class Page {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
