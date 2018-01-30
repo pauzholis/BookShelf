@@ -1,4 +1,4 @@
-package ru.testproject.bookshelf.Dao;
+package ru.testproject.bookshelf.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import ru.testproject.bookshelf.model.User;

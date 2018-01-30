@@ -1,4 +1,4 @@
-package ru.testproject.bookshelf.Dao;
+package ru.testproject.bookshelf.dao;
 
 import org.springframework.data.repository.CrudRepository;
 import ru.testproject.bookshelf.model.Notification;
