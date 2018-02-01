@@ -78,7 +78,7 @@ public class Book {
      * Список прав на чтение
      */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<AccessRights> accessRights = new HashSet<>();
+    private Set<AccessRight> accessRights = new HashSet<>();
 
     /**
      * Список запросов на чтение от других пользователей
@@ -172,11 +172,11 @@ public class Book {
         this.page = page;
     }
 
-    public Set<AccessRights> getAccessRights() {
+    public Set<AccessRight> getAccessRights() {
         return accessRights;
     }
 
-    public void setAccessRights(Set<AccessRights> accessRights) {
+    public void setAccessRights(Set<AccessRight> accessRights) {
         this.accessRights = accessRights;
     }
 

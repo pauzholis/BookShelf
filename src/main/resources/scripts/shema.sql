@@ -80,7 +80,6 @@ CREATE TABLE current_page (
 --
 CREATE TABLE access_rights (
   id          INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-
   book_id     INT UNSIGNED NOT NULL UNIQUE
   COMMENT 'Идентификатор книги',
   user_id     INT UNSIGNED NOT NULL UNIQUE
@@ -94,6 +93,7 @@ CREATE TABLE access_rights (
 -- Таблица активации пользователей
 --
 CREATE TABLE user_activation (
+  id          INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   user_id     INT UNSIGNED NOT NULL
   COMMENT 'Идентификатор пользователя',
   hash        VARCHAR(255) NOT NULL

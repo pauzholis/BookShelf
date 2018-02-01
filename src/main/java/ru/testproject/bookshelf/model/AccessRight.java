@@ -9,9 +9,8 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "access_rights")
-public class AccessRights {
+public class AccessRight {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
     /**
@@ -25,6 +24,7 @@ public class AccessRights {
      * Пользователь
      */
     @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     @MapsId
     private User user;
 
@@ -44,10 +44,10 @@ public class AccessRights {
     /**
      * Конструктор для hibernate
      */
-    public AccessRights() {
+    public AccessRight() {
     }
 
-    public AccessRights(Book book, User user, Date activeDate) {
+    public AccessRight(Book book, User user, Date activeDate) {
         this.book = book;
         this.user = user;
         this.activeDate = activeDate;
