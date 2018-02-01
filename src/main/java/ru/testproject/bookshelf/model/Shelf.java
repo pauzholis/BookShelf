@@ -39,7 +39,7 @@ public class Shelf {
     /**
      * Список кник входящих в состав данной полки
      */
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "bank", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "shelf ", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Book> book = new HashSet<>();
 
     /**
@@ -79,13 +79,5 @@ public class Shelf {
 
     public void setBook(Set<Book> book) {
         this.book = book;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
     }
 }

@@ -5,7 +5,7 @@ package ru.testproject.bookshelf.model;
  */
 public enum Channel {
     /**
-     * Отправка сообщения через email
-     * */
+     * Отправка сообщения через почту
+     */
     EMAIL
 }

@@ -84,7 +84,7 @@ public class Book {
      * Список запросов на чтение от других пользователей
      */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<AccessRequest>accessRequests = new HashSet<>();
+    private Set<AccessRequest> accessRequests = new HashSet<>();
 
     /**
      * Конструктор для hibernate
@@ -186,13 +186,5 @@ public class Book {
 
     public void setAccessRequests(Set<AccessRequest> accessRequests) {
         this.accessRequests = accessRequests;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
     }
 }

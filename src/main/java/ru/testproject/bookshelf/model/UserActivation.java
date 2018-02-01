@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Активация пользователя
  */
-@Entity
+@Embeddable
 @Table(name = "user_activation")
 public class UserActivation {
     /**
@@ -38,7 +38,8 @@ public class UserActivation {
     /**
      * Конструктор для hibernate
      */
-    public UserActivation(){}
+    public UserActivation() {
+    }
 
     public UserActivation(User user, String hash, Date createDate, Date acriveDate) {
         this.user = user;
@@ -72,13 +73,5 @@ public class UserActivation {
 
     public void setActiveDate(Date activeDate) {
         this.activeDate = activeDate;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
     }
 }
