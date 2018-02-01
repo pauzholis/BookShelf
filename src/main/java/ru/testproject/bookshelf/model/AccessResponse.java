@@ -8,14 +8,19 @@ import javax.persistence.*;
 @Entity
 @Table(name = "access_response")
 public class AccessResponse {
+
+    /**
+     * Идентификатор ответа на запрос
+     */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
 
     /**
      * Запрос на который дается ответ
      */
     @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "request_id")
     @MapsId
     private AccessRequest accessRequest;
 

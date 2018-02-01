@@ -1,8 +1,5 @@
 package ru.testproject.bookshelf.model;
 
-import org.hibernate.annotations.LazyToOne;
-import org.hibernate.annotations.LazyToOneOption;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,7 +14,7 @@ public class User {
      * Идентификатор пользователя
      */
     @Id
-    @Column
+    @Column(name = "id")
     private Long id;
 
     /**
@@ -51,12 +48,6 @@ public class User {
     private String confirmPassword;
 
     /**
-     * Активация пользователя
-     */
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private UserActivation userActivation;
-
-    /**
      * Список книг пренадлежащих пользователю
      */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -71,16 +62,22 @@ public class User {
     private Set<Page> page = new HashSet<>();
 
     /**
-     * Список прав доступа
+     * Право доступа
      */
-    @LazyToOne(LazyToOneOption.NO_PROXY)
-    private AccessRights accessRights;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private AccessRight accessRights;
 
     /**
      * Список ответов на запросы от других пользователей
      */
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AccessRequest> accessRequests = new HashSet<>();
+
+    /**
+     * Акцивация пользователя
+     */
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private UserActivation userActivation;
 
     /**
      * Конструктор для hibernate
@@ -138,11 +135,11 @@ public class User {
         this.page = page;
     }
 
-    public AccessRights getAccessRights() {
+    public AccessRight getAccessRights() {
         return accessRights;
     }
 
-    public void setAccessRights(AccessRights accessRights) {
+    public void setAccessRights(AccessRight accessRights) {
         this.accessRights = accessRights;
     }
 

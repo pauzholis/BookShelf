@@ -9,6 +9,14 @@ import java.util.Date;
 @Entity
 @Table(name = "user_activation")
 public class UserActivation {
+
+    /**
+     * Идентификатор акцивации пользователя
+     */
+    @Id
+    @Column(name = "id")
+    private Long id;
+
     /**
      * Пользователь
      */

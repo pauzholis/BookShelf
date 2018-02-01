@@ -49,7 +49,7 @@ public class AccessRequest {
     /**
      * ответ на запрос
      */
-    @LazyToOne(LazyToOneOption.NO_PROXY)
+    @OneToOne(mappedBy = "accessRequest", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private AccessResponse accessResponse;
 
     /**
@@ -93,11 +93,11 @@ public class AccessRequest {
         this.massage = massage;
     }
 
-    public AccessResponse getAccessResponse() {
-        return accessResponse;
-    }
-
-    public void setAccessResponse(AccessResponse accessResponse) {
-        this.accessResponse = accessResponse;
-    }
+//    public AccessResponse getAccessResponse() {
+//        return accessResponse;
+//    }
+//
+//    public void setAccessResponse(AccessResponse accessResponse) {
+//        this.accessResponse = accessResponse;
+//    }
 }

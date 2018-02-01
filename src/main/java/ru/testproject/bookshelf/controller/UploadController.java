@@ -14,9 +14,10 @@ import java.nio.file.Paths;
 
 @Controller
 public class UploadController {
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(UploadController.class);
 
     //Save the uploaded file to this folder
-    private static String UPLOADED_FOLDER = "F://temp//";
+    private static String UPLOADED_FOLDER = "C://temp//";
 
     @GetMapping("/")
     public String index() {
