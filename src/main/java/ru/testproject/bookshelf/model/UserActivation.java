@@ -6,12 +6,13 @@ import java.util.Date;
 /**
  * Активация пользователя
  */
-@Embeddable
+@Entity
 @Table(name = "user_activation")
 public class UserActivation {
     /**
      * Пользователь
      */
+    @MapsId
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;

@@ -39,8 +39,8 @@ public class Shelf {
     /**
      * Список кник входящих в состав данной полки
      */
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "shelf ", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Book> book = new HashSet<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "shelf", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Book> bookSet = new HashSet<>();
 
     /**
      * Конструктор для hibernate
@@ -74,10 +74,10 @@ public class Shelf {
     }
 
     public Set<Book> getBook() {
-        return book;
+        return bookSet;
     }
 
     public void setBook(Set<Book> book) {
-        this.book = book;
+        this.bookSet = book;
     }
 }

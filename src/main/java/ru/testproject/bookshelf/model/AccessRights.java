@@ -11,7 +11,6 @@ import java.util.Date;
 @Table(name = "access_rights")
 public class AccessRights {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
     /**

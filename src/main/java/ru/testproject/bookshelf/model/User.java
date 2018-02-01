@@ -17,7 +17,6 @@ public class User {
      * Идентификатор пользователя
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
     private Long id;
 
@@ -50,6 +49,12 @@ public class User {
      */
     @Transient
     private String confirmPassword;
+
+    /**
+     * Активация пользователя
+     */
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private UserActivation userActivation;
 
     /**
      * Список книг пренадлежащих пользователю

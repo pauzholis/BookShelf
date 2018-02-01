@@ -17,7 +17,6 @@ public class AccessRequest {
      * Идентификатор запроса
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
