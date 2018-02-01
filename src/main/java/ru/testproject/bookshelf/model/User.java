@@ -1,5 +1,8 @@
 package ru.testproject.bookshelf.model;
 
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -43,6 +46,12 @@ public class User {
     private Integer version;
 
     /**
+     * Подтверждение пароля
+     */
+    @Transient
+    private String confirmPassword;
+
+    /**
      * Список книг пренадлежащих пользователю
      */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -52,21 +61,21 @@ public class User {
      * Список страниц
      */
     @ManyToMany
-    @JoinTable(name = "current_page", joinColumns = @JoinColumn (name = "user_id"),
+    @JoinTable(name = "current_page", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "page_id"))
     private Set<Page> page = new HashSet<>();
 
     /**
-     *  Список прав доступа
+     * Список прав доступа
      */
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<AccessRights> accessRights = new HashSet<>();
+    @LazyToOne(LazyToOneOption.NO_PROXY)
+    private AccessRights accessRights;
 
     /**
-     *  Список ответов на запросы от других пользователей
+     * Список ответов на запросы от других пользователей
      */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<AccessRequest>accessRequests = new HashSet<>();
+    private Set<AccessRequest> accessRequests = new HashSet<>();
 
     /**
      * Конструктор для hibernate
@@ -124,11 +133,11 @@ public class User {
         this.page = page;
     }
 
-    public Set<AccessRights> getAccessRights() {
+    public AccessRights getAccessRights() {
         return accessRights;
     }
 
-    public void setAccessRights(Set<AccessRights> accessRights) {
+    public void setAccessRights(AccessRights accessRights) {
         this.accessRights = accessRights;
     }
 
@@ -140,11 +149,11 @@ public class User {
         this.accessRequests = accessRequests;
     }
 
-    public Integer getVersion() {
-        return version;
+    public String getConfirmPassword() {
+        return confirmPassword;
     }
 
-    public void setVersion(Integer version) {
-        this.version = version;
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 }

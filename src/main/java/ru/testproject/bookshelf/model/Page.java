@@ -1,6 +1,7 @@
 package ru.testproject.bookshelf.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Страница книги
@@ -41,9 +42,11 @@ public class Page {
     @Version
     private Integer version;
 
-    /** Пользователь просматривающий текущую страницу*/
+    /**
+     * Пользователи просматривающий текущую страницу
+     */
     @ManyToMany()
-    private User user;
+    private Set<User> user;
 
     /**
      * Конструктор для hibernate
@@ -85,19 +88,11 @@ public class Page {
         this.content = content;
     }
 
-    public User getUser() {
+    public Set<User> getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Set<User> user) {
         this.user = user;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
     }
 }

@@ -10,6 +10,10 @@ import java.util.Date;
 @Entity
 @Table(name = "access_rights")
 public class AccessRights {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
     /**
      * Книга на которую запрашивается доступ
      */
@@ -20,8 +24,8 @@ public class AccessRights {
     /**
      * Пользователь
      */
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
     private User user;
 
     /**
@@ -43,7 +47,7 @@ public class AccessRights {
     public AccessRights() {
     }
 
-    public AccessRights(Book book,User user, Date activeDate) {
+    public AccessRights(Book book, User user, Date activeDate) {
         this.book = book;
         this.user = user;
         this.activeDate = activeDate;
@@ -71,13 +75,5 @@ public class AccessRights {
 
     public void setActiveDate(Date activeDate) {
         this.activeDate = activeDate;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
     }
 }

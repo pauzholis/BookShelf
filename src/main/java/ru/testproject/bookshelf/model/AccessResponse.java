@@ -8,11 +8,15 @@ import javax.persistence.*;
 @Entity
 @Table(name = "access_response")
 public class AccessResponse {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     /**
      * Запрос на который дается ответ
      */
-    @ManyToOne
-    @JoinColumn(name = "request_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
     private AccessRequest accessRequest;
 
     /**
@@ -67,13 +71,5 @@ public class AccessResponse {
 
     public void setAccessRequest(AccessRequest accessRequest) {
         this.accessRequest = accessRequest;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
     }
 }

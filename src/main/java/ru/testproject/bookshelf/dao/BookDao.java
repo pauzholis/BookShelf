@@ -1,19 +1,19 @@
 package ru.testproject.bookshelf.dao;
 
 
-
 import org.springframework.data.repository.CrudRepository;
 import ru.testproject.bookshelf.model.Book;
+
 import java.util.List;
 
-public interface BookDao extends CrudRepository<Book,Long> {
+public interface BookDao extends CrudRepository<Book, Long> {
     /**
-     * Получение кнрг по автору
+     * Получение книг по автору
      */
-public List<Book> getAllByAuthor(String author);
+    List<Book> getAllByAuthor(String author);
 
     /**
      * Получение книг по названию
      */
-public List<Book> getAllByName(String name);
+    List<Book> getAllByName(String name);
 }

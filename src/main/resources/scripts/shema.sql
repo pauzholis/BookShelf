@@ -18,7 +18,7 @@ CREATE TABLE book (
   COMMENT 'Описание книги',
   isbn        NUMERIC(13)  NOT NULL
   COMMENT 'ISBN книги',
-  version INTEGER NOT NULL
+  version     INTEGER      NOT NULL
 );
 
 --
@@ -29,8 +29,8 @@ CREATE TABLE shelf (
   COMMENT 'Идентификатор полки',
   name        VARCHAR(255) NOT NULL
   COMMENT 'Название полки',
-  description LONGTEXT NOT NULL,
-  version INTEGER NOT NULL
+  description LONGTEXT     NOT NULL,
+  version     INTEGER      NOT NULL
   COMMENT 'Описание полки'
 );
 
@@ -45,7 +45,7 @@ CREATE TABLE user (
   password VARCHAR(255) NOT NULL
   COMMENT 'Пароль пользователя',
   active   BOOLEAN      NOT NULL DEFAULT FALSE,
-  version INTEGER NOT NULL
+  version  INTEGER      NOT NULL
   COMMENT 'Статус регистрации'
 );
 
@@ -60,7 +60,7 @@ CREATE TABLE page (
   number  INT UNSIGNED NOT NULL
   COMMENT 'Номер страницы',
   content LONGTEXT     NOT NULL,
-  version INTEGER NOT NULL
+  version INTEGER      NOT NULL
   COMMENT 'Содержимое страницы'
 );
 
@@ -71,7 +71,7 @@ CREATE TABLE current_page (
   user_id INT UNSIGNED UNIQUE NOT NULL
   COMMENT 'Идентификатор пользователя',
   page_id INT UNSIGNED UNIQUE NOT NULL,
-  version INTEGER NOT NULL
+  version INTEGER             NOT NULL
   COMMENT 'Идентификатор страницы текущей страницы'
 );
 
@@ -79,12 +79,14 @@ CREATE TABLE current_page (
 -- Таблица право доступа
 --
 CREATE TABLE access_rights (
+  id          INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+
   book_id     INT UNSIGNED NOT NULL UNIQUE
   COMMENT 'Идентификатор книги',
   user_id     INT UNSIGNED NOT NULL UNIQUE
   COMMENT 'Идентификатор пользователя',
   active_date DATE         NOT NULL,
-  version INTEGER NOT NULL
+  version     INTEGER      NOT NULL
   COMMENT 'Дата окончания действия права доступа к книге'
 );
 
@@ -97,7 +99,7 @@ CREATE TABLE user_activation (
   hash        VARCHAR(255) NOT NULL
   COMMENT 'Строка активации пользователя',
   active_date DATE,
-  version INTEGER NOT NULL
+  version     INTEGER      NOT NULL
   COMMENT 'Дата активации учетной записи'
 );
 
@@ -112,7 +114,7 @@ CREATE TABLE access_request (
   user_id INT UNSIGNED NOT NULL
   COMMENT 'Идентификатор пользователя',
   massage VARCHAR(255),
-  version INTEGER NOT NULL
+  version INTEGER      NOT NULL
   COMMENT 'Сообщение для запроса доступа'
 );
 
@@ -120,7 +122,7 @@ CREATE TABLE access_request (
 -- Таблица сообщений для активации профиля
 --
 CREATE TABLE notification (
-  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
+  id          INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
   COMMENT 'Идентификатор сообщения',
   channel     ENUM ('EMAIL')
   COMMENT 'Канал для отправки сообщения',
@@ -129,7 +131,7 @@ CREATE TABLE notification (
   adress      VARCHAR(255)
   COMMENT 'Адресс электронной почты',
   massage     VARCHAR(255),
-  version INTEGER NOT NULL
+  version     INTEGER      NOT NULL
   COMMENT 'Сообщение активации учетной записи'
 );
 
@@ -137,12 +139,13 @@ CREATE TABLE notification (
 -- Таблица ответов на  запросы
 --
 CREATE TABLE access_response (
+  id               INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   request_id       INT UNSIGNED NOT NULL
   COMMENT 'Идентификатор запроса',
   response_massage VARCHAR(255)
   COMMENT 'Ответное сообщение',
   approved         BOOLEAN      NOT NULL,
-  version INTEGER NOT NULL
+  version          INTEGER      NOT NULL
   COMMENT 'Статус одобрения'
 );
 

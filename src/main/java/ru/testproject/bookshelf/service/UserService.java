@@ -1,7 +1,10 @@
 package ru.testproject.bookshelf.service;
 
-/**
- * Created by Mihail on 31.01.2018.
- */
+
+import ru.testproject.bookshelf.model.User;
+
 public interface UserService {
+    void save(User user);
+
+    User findByUsername(String username);
 }

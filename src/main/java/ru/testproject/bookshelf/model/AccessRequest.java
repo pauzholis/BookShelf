@@ -1,5 +1,8 @@
 package ru.testproject.bookshelf.model;
 
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -45,14 +48,14 @@ public class AccessRequest {
     private Integer version;
 
     /**
-     * Список ответов на запросы
+     * ответ на запрос
      */
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<AccessResponse> accessResponseSet = new HashSet<>();
+    @LazyToOne(LazyToOneOption.NO_PROXY)
+    private AccessResponse accessResponse;
 
-   /**
-    * Конструктор для hibernate
-    */
+    /**
+     * Конструктор для hibernate
+     */
     public AccessRequest() {
     }
 
@@ -91,20 +94,11 @@ public class AccessRequest {
         this.massage = massage;
     }
 
-    public Set<AccessResponse> getAccessResponseSet() {
-        return accessResponseSet;
+    public AccessResponse getAccessResponse() {
+        return accessResponse;
     }
 
-    public void setAccessResponseSet(Set<AccessResponse> accessResponseSet) {
-        this.accessResponseSet = accessResponseSet;
+    public void setAccessResponse(AccessResponse accessResponse) {
+        this.accessResponse = accessResponse;
     }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
 }
