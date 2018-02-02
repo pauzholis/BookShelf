@@ -14,6 +14,7 @@ public class User {
      * Идентификатор пользователя
      */
     @Id
+    @GeneratedValue
     @Column(name = "id")
     private Long id;
 

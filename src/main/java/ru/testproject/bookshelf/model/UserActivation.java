@@ -20,9 +20,9 @@ public class UserActivation {
     /**
      * Пользователь
      */
+    @MapsId
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @MapsId
     private User user;
 
     /**
