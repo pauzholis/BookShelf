@@ -7,9 +7,9 @@ INSERT INTO shelf (name, description, version) VALUES ('Детям и родит
 INSERT INTO shelf (name, description, version) VALUES ('Бизнес книги', 'На этой полке находятся книги, которые помогут вам в
 ведениии бизнеса',0);
 INSERT INTO user (email, password, active, version) VALUES
-  ('rempenza@mail.ru', '$2a$10$xXyvUwRggRK/RK8S8CQff.Rs0xIPUKqeDOw8lLTFX4BcNr0uAx68O', TRUE,0);
+  ('rempenza@mail.ru', '12345', TRUE,0);
 INSERT INTO user (email, password, active,version) VALUES
-  ('testproject@gmail.com', '$2a$10$zHrH./1hqGPbPEBr2/J7ketBnHeyVmzbA37bldPjL2k2Wxrc/EZBG', FALSE,0);
+  ('testproject@gmail.com', 'asdfg', FALSE,0);
 
 INSERT INTO book (shelf_id, user_id, file_path, name, author, description, isbn,version)
 VALUES (1, 1, 'Origin.txt', 'Origin', 'Den Braun', 'Роберт Лэнгдон прибывает
