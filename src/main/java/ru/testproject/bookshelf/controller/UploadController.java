@@ -1,5 +1,7 @@
 package ru.testproject.bookshelf.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +16,7 @@ import java.nio.file.Paths;
 
 @Controller
 public class UploadController {
-    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(UploadController.class);
+    private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
 
     //Save the uploaded file to this folder
     private static String UPLOADED_FOLDER = "C://temp//";
