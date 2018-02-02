@@ -21,12 +21,12 @@ public class UploadController {
     //Save the uploaded file to this folder
     private static String UPLOADED_FOLDER = "C://temp//";
 
-    @GetMapping("/")
+    @GetMapping("/load")
     public String index() {
         return "upload";
     }
 
-    @PostMapping("/upload") // //new annotation since 4.3
+    @PostMapping("/upload")
     public String singleFileUpload(@RequestParam("file") MultipartFile file,
                                    RedirectAttributes redirectAttributes) {
 

@@ -6,7 +6,7 @@ import ru.testproject.bookshelf.model.User;
 
 import java.util.List;
 
-public interface UserService extends UserDetailsService {
+public interface UserService {
     User getUserById(long id);
 
     User getUserByEmail(String email);

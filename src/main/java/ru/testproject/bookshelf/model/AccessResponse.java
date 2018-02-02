@@ -27,7 +27,7 @@ public class AccessResponse {
     /**
      * Текст ответа на запрос
      */
-    @Column(name = "massage")
+    @Column(name = "response_massage")
     private String massage;
 
     /**
