@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import ru.testproject.bookshelf.service.Impl.UploadService;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -38,9 +39,11 @@ public class UploadController {
         try {
 
             // Get the file and save it somewhere
-            byte[] bytes = file.getBytes();
-            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
-            Files.write(path, bytes);
+            UploadService uploadService = new UploadService();
+            uploadService.saveFile(file);
+//            byte[] bytes = file.getBytes();
+//            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+//            Files.write(path, bytes);
 
             redirectAttributes.addFlashAttribute("message",
                     "You successfully uploaded '" + file.getOriginalFilename() + "'");

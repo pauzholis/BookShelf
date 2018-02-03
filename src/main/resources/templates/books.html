@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www/thymeleaf.org">
+<head>
+    <title>Book List</title>
+</head>
+<body>
+<h1>Book List</h1>
+<div>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Description</th>
+            <th>ISBN</th>
+            <th>Shelf</th>
+            <th>User</th>
+            <th>filePath</th>
+        </tr>
+        <tr th:each ="bookView : ${bookView}">
+            <td th:utext="${bookView.name}">...</td>
+            <td th:utext="${bookView.author}">...</td>
+            <td th:utext="${bookView.description}">...</td>
+            <td th:utext="${bookView.isbn}">...</td>
+            <td th:utext="${bookView.shelf}">...</td>
+            <td th:utext="${bookView.user}">...</td>
+            <td th:utext="${bookView.filePath}">...</td>
+            <td>
+                <form th:action="@{books/delete/{id}(id=${bookView.id})}">
+                    <button type="submit">Delete</button>
+                </form>
+
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
