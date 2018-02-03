@@ -20,11 +20,6 @@ public class RegistrationController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = {"/"})
-    public String index() {
-        return "/index";
-    }
-
     @RequestMapping(value = {"/registration"})
     public String showRegistrationPage(Model model) {
         model.addAttribute("user", new User());
@@ -38,8 +33,6 @@ public class RegistrationController {
         Boolean active = true;
         User newUser = new User(email, password, active);
         userService.save(newUser);
-        return "redirect:/upload";
+        return "redirect:/books";
     }
-
-
 }

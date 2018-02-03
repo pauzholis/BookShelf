@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <!-- Latest compiled and minified CSS -->
@@ -8,26 +8,21 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+    <style>
+        div {
+            border: 1px solid black; /* Параметры рамки */
+            padding: 5px; /* Поля вокруг текста */
+            margin-bottom: 5px; /* Отступ снизу */
+        }
+        #center {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-<h1 class="page-header">Registration</h1>
-<form action="#" th:action="@{registration/submit}"
-      th:object="${user}" method="POST">
-    <div class="form-group">
-    <label>Email</label>
-    <input type="text" class="form-control"  th:field="*{email}"/>
-</div>
-    <div class="form-group">
-        <label>Password</label>
-        <input type="text" class="form-control"  th:field="*{password}"/>
-    </div>
-
-    <button type="submit" class="btn btn-default">Ok</button>
-</form>
-        </div>
+<div id="center">
+    <div class="content">
+        <h1>PONG</h1>
     </div>
 </div>
 </body>

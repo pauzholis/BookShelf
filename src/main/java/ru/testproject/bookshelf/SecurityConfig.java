@@ -30,12 +30,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/registration", "/registration/submit").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().permitAll()
+                .formLogin().loginPage("/login").usernameParameter("email").passwordParameter("password")
+                .successForwardUrl("/ping").permitAll()
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
                 .and().csrf().disable();
     }
-
 
     @Bean
     public PasswordEncoder bcryptEncoder() {
