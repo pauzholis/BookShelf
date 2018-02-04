@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www/thymeleaf.org">
+<head>
+    <title>Shelf List</title>
+</head>
+<body>
+<h1>Shelf List</h1>
+<div>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+        <tr th:each ="shelfView : ${shelfView}">
+            <td th:utext="${shelfView.name}">...</td>
+            <td th:utext="${shelfView.description}">...</td>
+            <td>
+                <form th:action="@{shelf/delete/{id}(id=${shelfView.id})}">
+                    <button type="submit">Delete</button>
+                </form>
+
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
