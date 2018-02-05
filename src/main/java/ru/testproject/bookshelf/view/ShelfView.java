@@ -9,8 +9,7 @@ public class ShelfView {
     public ShelfView() {
     }
 
-    public ShelfView(Long id, String name, String description) {
-        this.id = id;
+    public ShelfView(String name, String description) {
         this.name = name;
         this.description = description;
     }
