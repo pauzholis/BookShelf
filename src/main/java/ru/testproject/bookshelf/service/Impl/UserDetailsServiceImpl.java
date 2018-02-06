@@ -29,13 +29,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User user = userDao.getUserByEmail(email);
         if (user == null) {
             throw new UsernameNotFoundException("user " + email + " was not found");
-        } else {
+        }
             Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
             authorities.add(new SimpleGrantedAuthority("USER"));
             UserDetails userDetails = new org.springframework.security.core.userdetails
                     .User(user.getEmail(), user.getPassword(), true,
                     true, true, true, authorities);
             return userDetails;
-        }
+
     }
 }

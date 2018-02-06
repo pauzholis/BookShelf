@@ -34,7 +34,6 @@ public class UserActivation {
     /**
      * Строка активации пользователя
      */
-
     @Temporal(value = TemporalType.DATE)
     @Column(name = "active_date")
     private Date activeDate;

@@ -33,7 +33,7 @@ public class ShelfServiceImpl implements ShelfService {
 
     @Override
     public List<Shelf> getAllShelves() {
-        return Lists.newArrayList(shelfDao.findAll());
+        return shelfDao.findAll();
     }
 
     @Override
