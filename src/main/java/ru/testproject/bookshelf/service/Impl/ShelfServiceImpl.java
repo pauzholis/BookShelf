@@ -11,7 +11,10 @@ import ru.testproject.bookshelf.model.Shelf;
 import ru.testproject.bookshelf.service.ShelfService;
 import ru.testproject.bookshelf.view.ShelfView;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 @Scope(proxyMode = ScopedProxyMode.INTERFACES)
@@ -19,7 +22,6 @@ public class ShelfServiceImpl implements ShelfService {
     private final ShelfDao shelfDao;
 
     @Autowired
-
     public ShelfServiceImpl(ShelfDao shelfDao) {
         this.shelfDao = shelfDao;
     }
@@ -32,8 +34,19 @@ public class ShelfServiceImpl implements ShelfService {
     }
 
     @Override
+    /**
+     * готово
+     */
     public List<Shelf> getAllShelves() {
-        return Lists.newArrayList(shelfDao.findAll());
+        List<Shelf> shelves = shelfDao.findAll();
+        Function<Shelf, ShelfView> mapShelf = s -> {
+            ShelfView shelfView = new ShelfView();
+            shelfView.id = s.getId();
+            shelfView.name = s.getName();
+            shelfView.description = s.getDescription();
+            return shelfView;
+        };
+        return shelves.stream().map(mapShelf).collect(Collectors.toList());
     }
 
     @Override

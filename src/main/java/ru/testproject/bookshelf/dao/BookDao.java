@@ -1,12 +1,10 @@
 package ru.testproject.bookshelf.dao;
 
-
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import ru.testproject.bookshelf.model.Book;
-
 import java.util.List;
 
-public interface BookDao extends CrudRepository<Book, Long> {
+public interface BookDao extends JpaRepository<Book, Long> {
     /**
      * Получение книг по автору
      */
