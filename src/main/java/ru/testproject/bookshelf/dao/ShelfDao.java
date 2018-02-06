@@ -1,8 +1,13 @@
 package ru.testproject.bookshelf.dao;
 
-
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import ru.testproject.bookshelf.model.Shelf;
 
-public interface ShelfDao extends CrudRepository<Shelf, Long> {
+import java.util.List;
+
+public interface ShelfDao extends JpaRepository<Shelf, Long> {
+    List<Shelf> findAll();
 }
+
+
+

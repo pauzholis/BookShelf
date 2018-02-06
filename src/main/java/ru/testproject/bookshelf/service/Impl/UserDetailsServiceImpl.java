@@ -1,6 +1,8 @@
 package ru.testproject.bookshelf.service.Impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Repository
-@Transactional
+@Scope(proxyMode = ScopedProxyMode.INTERFACES)
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserDao userDao;
@@ -25,6 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userDao.getUserByEmail(email);
         if (user == null) {
@@ -33,7 +36,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
             authorities.add(new SimpleGrantedAuthority("USER"));
             UserDetails userDetails = new org.springframework.security.core.userdetails
-                    .User(user.getEmail(), user.getPassword(), true,
+                    .User(user.getEmail(), user.getPassword(), user.getActive(),
                     true, true, true, authorities);
             return userDetails;
 

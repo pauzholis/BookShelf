@@ -19,10 +19,9 @@
     </properties>
 
 
-    <!-- Add typical dependencies for a web application -->
+
     <dependencies>
-        <!-- Spring Boot dependencies -->
-        <dependency>
+               <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
@@ -38,12 +37,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
-        <!-- Testing dependencies -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -54,26 +53,12 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
             <version>1.5.9.RELEASE</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.icegreen</groupId>
-            <artifactId>greenmail</artifactId>
-            <version>1.4.1</version>
-        </dependency>
-        <!-- Other dependencies -->
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <!--  <version>9.3-1102-jdbc41</version>  -->
-        </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
             <version>1.5.9.RELEASE</version>
         </dependency>
     </dependencies>
-
 
     <build>
         <plugins>

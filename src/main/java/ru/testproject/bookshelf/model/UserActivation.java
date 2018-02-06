@@ -9,7 +9,6 @@ import java.util.Date;
 @Entity
 @Table(name = "user_activation")
 public class UserActivation {
-
     /**
      * Идентификатор акцивации пользователя
      */
@@ -50,10 +49,10 @@ public class UserActivation {
     public UserActivation() {
     }
 
-    public UserActivation(User user, String hash, Date createDate, Date acriveDate) {
+    public UserActivation(User user, String hash, Long id) {
         this.user = user;
         this.hash = hash;
-        this.activeDate = acriveDate;
+        this.id = id;
     }
 
     public User getUser() {

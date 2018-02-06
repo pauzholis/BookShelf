@@ -22,12 +22,22 @@ public interface UserService {
     List<User> getAllUsers();
 
     /**
-     * Сохранение пользователя
-     */
-    User save(User user);
-
-    /**
      * Удалить пользователей
      */
-    List<User> remove(String email);
+    void remove(String email);
+
+    /**
+     * Регистрация пользователя
+     */
+    void registerUser(User user);
+
+    /**
+     * Сохранение пользователя
+     */
+    void save(User user);
+
+    /**
+     * Установка активации пользователя
+     */
+    void isUserActive(String email);
 }

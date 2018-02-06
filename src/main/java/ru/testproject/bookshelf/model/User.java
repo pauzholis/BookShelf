@@ -43,12 +43,6 @@ public class User {
     private Integer version;
 
     /**
-     * Подтверждение пароля
-     */
-    @Transient
-    private String confirmPassword;
-
-    /**
      * Список книг пренадлежащих пользователю
      */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -86,10 +80,9 @@ public class User {
     public User() {
     }
 
-    public User(String email, String password, Boolean active) {
+    public User(String email, String password) {
         this.email = email;
         this.password = password;
-        this.active = active;
     }
 
     public Long getId() {
@@ -152,11 +145,15 @@ public class User {
         this.accessRequests = accessRequests;
     }
 
-    public String getConfirmPassword() {
-        return confirmPassword;
+    public UserActivation getUserActivation() {
+        return userActivation;
     }
 
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
+    public void setUserActivation(UserActivation userActivation) {
+        this.userActivation = userActivation;
+    }
+
+    public Integer getVersion() {
+        return version;
     }
 }

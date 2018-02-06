@@ -29,7 +29,7 @@ CREATE TABLE shelf (
   COMMENT 'Идентификатор полки',
   name        VARCHAR(255) NOT NULL
   COMMENT 'Название полки',
-  description LONGTEXT     NOT NULL,
+    description LONGTEXT     NOT NULL,
   version     INTEGER      NOT NULL
   COMMENT 'Описание полки'
 );
@@ -169,6 +169,8 @@ CREATE INDEX ix_shelf_id
 
 CREATE INDEX ix_shelf_name
   ON shelf (name);
+CREATE INDEX ix_notification_adress
+  ON notification(adress);
 
 ALTER TABLE book
   ADD FOREIGN KEY (shelf_id) REFERENCES shelf (id)

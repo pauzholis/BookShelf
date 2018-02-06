@@ -9,12 +9,10 @@
     <table border="1">
         <tr>
             <th>Email</th>
-            <th>Password</th>
-            <th>Active</th>
-        </tr>
-        <tr th:each ="userView : ${userView}">
-            <td th:utext="${userView.name}">...</td>
-            <td th:utext="${userView.description}">...</td>
+                   </tr>
+        <tr th:each="userView : ${userView}">
+            <td th:utext="${userView.Email}">...</td>
+
             <td>
                 <form th:action="@{user/delete/{id}(id=${userView.id})}">
                     <button type="submit">Delete</button>

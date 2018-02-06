@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ShelfService {
     ShelfView getShelf (Long id);
-    List<Shelf> getAllShelves();
-    void update (ShelfView view);
+    List<ShelfView> getAllShelves();
+    void save (ShelfView view);
     void delete (Long id);
 }
