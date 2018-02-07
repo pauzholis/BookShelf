@@ -153,7 +153,4 @@ public class User {
         this.userActivation = userActivation;
     }
 
-    public Integer getVersion() {
-        return version;
     }
-}

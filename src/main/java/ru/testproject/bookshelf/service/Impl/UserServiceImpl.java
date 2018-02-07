@@ -1,12 +1,11 @@
 package ru.testproject.bookshelf.service.Impl;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.testproject.bookshelf.dao.NotificationDao;
@@ -16,8 +15,6 @@ import ru.testproject.bookshelf.model.Notification;
 import ru.testproject.bookshelf.model.User;
 import ru.testproject.bookshelf.model.UserActivation;
 import ru.testproject.bookshelf.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.List;
@@ -25,17 +22,18 @@ import java.util.UUID;
 
 import static org.springframework.transaction.annotation.Propagation.REQUIRES_NEW;
 
-@Repository
+
 @Scope(proxyMode = ScopedProxyMode.INTERFACES)
 @Service
 public class UserServiceImpl implements UserService {
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
-    private static final String ACTIVATION_URL = "http://localhost:8080/activation?code=%s";
+    private static final String ACTIVATION_URL = "%shttp://localhost:8080/activation?code=%s";
+    private static final String ACTIVATION_MESSAGE = "Для активации вашего аккаунта пройдите по этой ссылке ";
     private final UserDao userDao;
     private final NotificationDao notificationDao;
 
     @Autowired
-    public UserServiceImpl(UserDao userDao, PasswordEncoder passwordEncoder, NotificationDao notificationDao) {
+    public UserServiceImpl(UserDao userDao, NotificationDao notificationDao) {
         this.userDao = userDao;
         this.notificationDao = notificationDao;
     }
@@ -75,20 +73,20 @@ public class UserServiceImpl implements UserService {
     }
 
     private UserActivation createUserActivation(User user, String activationCode) {
-        return new UserActivation(user, activationCode, user.getId());
+        return new UserActivation(user, activationCode);
     }
 
     private void createNotification(User user, String activationCode) {
         Date currentDate = new Date();
         Notification notification = new Notification(Channel.EMAIL, currentDate,
-                user.getEmail(), String.format("Для активации вашего аккаунта пройдите по этой ссылке "
-                + ACTIVATION_URL, activationCode));
+                user.getEmail(), String.format(ACTIVATION_URL,ACTIVATION_MESSAGE, activationCode));
         notificationDao.save(notification);
     }
 
     @Override
     @Transactional(propagation = REQUIRES_NEW)
-    public void registerUser(User user) {
+    public void registerUser(String email, String password) {
+        User user = new User(email,password);
         String activationCode = generateActivationCode();
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         UserActivation userActivation = createUserActivation(user, activationCode);

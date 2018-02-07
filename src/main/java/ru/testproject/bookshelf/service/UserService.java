@@ -29,7 +29,7 @@ public interface UserService {
     /**
      * Регистрация пользователя
      */
-    void registerUser(User user);
+    void registerUser(String email, String password);
 
     /**
      * Сохранение пользователя

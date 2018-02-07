@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ru.testproject.bookshelf.model.User;
-import ru.testproject.bookshelf.service.MailService;
 import ru.testproject.bookshelf.service.UserService;
 
 @Controller
@@ -15,12 +14,10 @@ import ru.testproject.bookshelf.service.UserService;
 public class RegistrationController {
 
     private final UserService userService;
-    private final MailService mailService;
 
     @Autowired
-    public RegistrationController(UserService userService, MailService mailService) {
+    public RegistrationController(UserService userService) {
         this.userService = userService;
-        this.mailService = mailService;
     }
 
     @RequestMapping(value = {"/registration"})
@@ -33,9 +30,7 @@ public class RegistrationController {
     public String registration(@ModelAttribute User user) {
         String email = user.getEmail();
         String password = user.getPassword();
-        User newUser = new User(email, password);
-        userService.registerUser(newUser);
-        mailService.sendEmail(newUser.getEmail());
+        userService.registerUser(email,password);
         return "/activation";
     }
 }

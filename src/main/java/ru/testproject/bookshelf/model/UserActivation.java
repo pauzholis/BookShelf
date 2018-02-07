@@ -31,7 +31,7 @@ public class UserActivation {
     private String hash;
 
     /**
-     * Строка активации пользователя
+     * Дата пользователя
      */
     @Temporal(value = TemporalType.DATE)
     @Column(name = "active_date")
@@ -49,11 +49,10 @@ public class UserActivation {
     public UserActivation() {
     }
 
-    public UserActivation(User user, String hash, Long id) {
+    public UserActivation(User user, String hash) {
         this.user = user;
         this.hash = hash;
-        this.id = id;
-    }
+            }
 
     public User getUser() {
         return user;

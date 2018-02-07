@@ -15,7 +15,7 @@ import ru.testproject.bookshelf.model.User;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@Repository
+
 @Scope(proxyMode = ScopedProxyMode.INTERFACES)
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface NotificationDao extends JpaRepository<Notification, Long> {
     /**
-     * Получить сообщениe для активации по адресу
+     * Получить сообщениe по адресу
      */
      Notification findByAdress(String email);
 

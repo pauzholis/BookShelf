@@ -5,5 +5,5 @@ import ru.testproject.bookshelf.model.Notification;
 
 public interface MailService {
 
-    void sendEmail(String email);
+    void sendNextMail(String email);
 }

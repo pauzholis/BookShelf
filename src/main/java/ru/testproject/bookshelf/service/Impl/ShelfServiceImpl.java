@@ -15,7 +15,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
-@Repository
 @Scope(proxyMode = ScopedProxyMode.INTERFACES)
 public class ShelfServiceImpl implements ShelfService {
     private final ShelfDao shelfDao;
