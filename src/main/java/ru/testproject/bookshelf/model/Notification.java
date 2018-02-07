@@ -20,7 +20,7 @@ public class Notification {
     /**
      * Канал, посредством которого осуществляется передача сообщения
      */
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column(name = "channel")
     private Channel channel;
 
@@ -28,7 +28,7 @@ public class Notification {
      * Дата окончания активности сообщения для отправки пользователю
      */
     @Temporal(value = TemporalType.DATE)
-    @Column(name = "date")
+    @Column(name = "active_date")
     private Date date;
 
     /**
@@ -40,7 +40,7 @@ public class Notification {
     /**
      * Дата отправки сообщения
      */
-    @Column(name = "message")
+    @Column(name = "massage")
     private String massage;
 
     /**

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add Shelf</title>
+</head>
+<body>
+<h1>Create a Shelf:</h1>
+
+
+<form action="#" th:action="@{addShelf/submit}"
+      th:object="${shelfView}" method="POST">
+    <div class="form-group">
+        <label>Наименование</label>
+        <input type="text" class="form-control" th:field="*{name}"/>
+    </div>
+
+    <div class="form-group">
+        <label>Описание</label>
+        <input type="text" th:field="*{description}"/>
+    </div>
+
+    <button type="submit">Сохранить</button>
+</form>
+</body>
+</html>

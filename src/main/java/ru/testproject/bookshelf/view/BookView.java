@@ -26,7 +26,9 @@ public class BookView {
         this.description = description;
         this.isbn = isbn;
     }
-    public String toString () {
+
+    @Override
+    public String toString() {
         return "{shelf:" + shelf + ";user:" + user + ";filePath" + filePath + ";name" + name + ";author" + author +
                 ";description" + description + ";isbn" + isbn + "}";
     }

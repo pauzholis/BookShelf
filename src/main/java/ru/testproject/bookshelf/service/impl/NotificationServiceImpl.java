@@ -1,4 +1,4 @@
-package ru.testproject.bookshelf.service.Impl;
+package ru.testproject.bookshelf.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.testproject.bookshelf.dao.NotificationDao;
 import ru.testproject.bookshelf.model.Notification;
 import ru.testproject.bookshelf.service.NotificationService;
+
 import java.util.List;
 
 @Service
@@ -16,7 +17,7 @@ public class NotificationServiceImpl implements NotificationService {
     private final NotificationDao notificationDao;
 
     @Autowired
-     public NotificationServiceImpl(NotificationDao notificationDao) {
+    public NotificationServiceImpl(NotificationDao notificationDao) {
         this.notificationDao = notificationDao;
     }
 

@@ -30,7 +30,7 @@ public class RegistrationController {
     public String registration(@ModelAttribute User user) {
         String email = user.getEmail();
         String password = user.getPassword();
-        userService.registerUser(email,password);
+        userService.registerUser(email, password);
         return "/activation";
     }
 }

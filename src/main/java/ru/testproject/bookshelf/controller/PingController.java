@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class PingController {
+    /**
+     * Проверка работоспособности приложения
+     */
     @RequestMapping("/ping")
     public String ping() {
         return "pong";

@@ -83,6 +83,7 @@ public class User {
     public User(String email, String password) {
         this.email = email;
         this.password = password;
+        this.active = false;
     }
 
     public Long getId() {
@@ -153,4 +154,4 @@ public class User {
         this.userActivation = userActivation;
     }
 
-    }
+}

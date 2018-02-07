@@ -1,15 +1,15 @@
-package ru.testproject.bookshelf.service.Impl;
+package ru.testproject.bookshelf.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.testproject.bookshelf.dao.ShelfDao;
 import ru.testproject.bookshelf.model.Shelf;
 import ru.testproject.bookshelf.service.ShelfService;
 import ru.testproject.bookshelf.view.ShelfView;
+
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -24,6 +24,9 @@ public class ShelfServiceImpl implements ShelfService {
         this.shelfDao = shelfDao;
     }
 
+    /**
+     * Получить полку
+     */
     @Override
     @Transactional
     public ShelfView getShelf(Long id) {
@@ -31,6 +34,9 @@ public class ShelfServiceImpl implements ShelfService {
         return new ShelfView(shelf.getName(), shelf.getDescription());
     }
 
+    /**
+     * Получить все полки
+     */
     @Override
     @Transactional
     public List<ShelfView> getAllShelves() {
@@ -45,6 +51,9 @@ public class ShelfServiceImpl implements ShelfService {
         return shelves.stream().map(mapShelf).collect(Collectors.toList());
     }
 
+    /**
+     * Сохранить новую полку
+     */
     @Override
     @Transactional
     public void save(ShelfView view) {
@@ -52,6 +61,9 @@ public class ShelfServiceImpl implements ShelfService {
         shelfDao.save(shelf);
     }
 
+    /**
+     * Удалить полку
+     */
     @Override
     @Transactional
     public void delete(Long id) {

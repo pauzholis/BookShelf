@@ -1,11 +1,6 @@
 package ru.testproject.bookshelf.model;
 
-import org.hibernate.annotations.LazyToOne;
-import org.hibernate.annotations.LazyToOneOption;
-
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Запрос доступа
@@ -93,12 +88,4 @@ public class AccessRequest {
     public void setMassage(String massage) {
         this.massage = massage;
     }
-
-//    public AccessResponse getAccessResponse() {
-//        return accessResponse;
-//    }
-//
-//    public void setAccessResponse(AccessResponse accessResponse) {
-//        this.accessResponse = accessResponse;
-//    }
 }

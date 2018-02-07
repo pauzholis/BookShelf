@@ -29,7 +29,7 @@ CREATE TABLE shelf (
   COMMENT 'Идентификатор полки',
   name        VARCHAR(255) NOT NULL
   COMMENT 'Название полки',
-    description LONGTEXT     NOT NULL,
+  description LONGTEXT     NOT NULL,
   version     INTEGER      NOT NULL
   COMMENT 'Описание полки'
 );
@@ -118,20 +118,19 @@ CREATE TABLE access_request (
   COMMENT 'Сообщение для запроса доступа'
 );
 
---
 -- Таблица сообщений для активации профиля
 --
 CREATE TABLE notification (
-  id          INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
+  id          INT UNSIGNED          NOT NULL AUTO_INCREMENT PRIMARY KEY
   COMMENT 'Идентификатор сообщения',
-  channel     ENUM ('EMAIL')
+  channel     ENUM ('email', 'sms') NOT NULL
   COMMENT 'Канал для отправки сообщения',
   active_date DATE
   COMMENT 'Дата активации сообщения',
   adress      VARCHAR(255)
   COMMENT 'Адресс электронной почты',
   massage     VARCHAR(255),
-  version     INTEGER      NOT NULL
+  version     INTEGER               NOT NULL
   COMMENT 'Сообщение активации учетной записи'
 );
 
@@ -170,7 +169,7 @@ CREATE INDEX ix_shelf_id
 CREATE INDEX ix_shelf_name
   ON shelf (name);
 CREATE INDEX ix_notification_adress
-  ON notification(adress);
+  ON notification (adress);
 
 ALTER TABLE book
   ADD FOREIGN KEY (shelf_id) REFERENCES shelf (id)

@@ -3,7 +3,6 @@ package ru.testproject.bookshelf.model;
 import javax.persistence.*;
 import java.util.Date;
 
-
 /**
  * Права доступа
  */

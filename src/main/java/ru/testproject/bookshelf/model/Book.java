@@ -92,9 +92,8 @@ public class Book {
     public Book() {
     }
 
-    public Book(Long id, Shelf shelf, User user, String filePath, String name, String author, String description,
+    public Book(Shelf shelf, User user, String filePath, String name, String author, String description,
                 Long isbn) {
-        this.id = id;
         this.shelf = shelf;
         this.user = user;
         this.filePath = filePath;
@@ -102,10 +101,6 @@ public class Book {
         this.author = author;
         this.description = description;
         this.isbn = isbn;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public Shelf getShelf() {

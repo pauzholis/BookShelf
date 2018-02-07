@@ -6,6 +6,9 @@ import ru.testproject.bookshelf.model.Shelf;
 import java.util.List;
 
 public interface ShelfDao extends JpaRepository<Shelf, Long> {
+    /**
+     * Получить все полки
+     */
     List<Shelf> findAll();
 }
 

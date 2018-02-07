@@ -6,8 +6,24 @@ import ru.testproject.bookshelf.view.BookView;
 import java.util.List;
 
 public interface BookService {
-    BookView getBook (Long id);
+
+    /**
+     * Получить книгу
+     */
+    BookView getBook(Long id);
+
+    /**
+     * Получить все книги
+     */
     List<BookView> getAllBooks();
-    void update (BookView view);
-    void delete (Long id);
+
+    /**
+     * Добавить книгу
+     */
+    void update(BookView view);
+
+    /**
+     * Удалить книгу
+     */
+    void delete(Long id);
 }

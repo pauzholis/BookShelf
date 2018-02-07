@@ -1,4 +1,4 @@
-package ru.testproject.bookshelf.service.Impl;
+package ru.testproject.bookshelf.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -7,11 +7,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.testproject.bookshelf.dao.UserDao;
 import ru.testproject.bookshelf.model.User;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -33,12 +33,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("user " + email + " was not found");
         }
-            Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-            authorities.add(new SimpleGrantedAuthority("USER"));
-            UserDetails userDetails = new org.springframework.security.core.userdetails
-                    .User(user.getEmail(), user.getPassword(), user.getActive(),
-                    true, true, true, authorities);
-            return userDetails;
+        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("USER"));
+        UserDetails userDetails = new org.springframework.security.core.userdetails
+                .User(user.getEmail(), user.getPassword(), user.getActive(),
+                true, true, true, authorities);
+        return userDetails;
 
     }
 }

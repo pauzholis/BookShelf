@@ -16,13 +16,13 @@
             <th>User</th>
             <th>filePath</th>
         </tr>
-        <tr th:each ="bookView : ${bookView}">
+        <tr th:each="bookView : ${bookView}">
             <td th:utext="${bookView.name}">...</td>
             <td th:utext="${bookView.author}">...</td>
             <td th:utext="${bookView.description}">...</td>
             <td th:utext="${bookView.isbn}">...</td>
-            <td th:utext="${bookView.shelf}">...</td>
-            <td th:utext="${bookView.user}">...</td>
+            <td th:utext="${bookView.shelf.name}">...</td>
+            <td th:utext="${bookView.user.email}">...</td>
             <td th:utext="${bookView.filePath}">...</td>
             <td>
                 <form th:action="@{books/delete/{id}(id=${bookView.id})}">
@@ -33,5 +33,9 @@
         </tr>
     </table>
 </div>
+<h2>Add Book</h2>
+<form action="book/addBook">
+    <button type="submit">Add Book</button>
+</form>
 </body>
 </html>

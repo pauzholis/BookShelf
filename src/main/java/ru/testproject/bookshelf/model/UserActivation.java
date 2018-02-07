@@ -52,7 +52,7 @@ public class UserActivation {
     public UserActivation(User user, String hash) {
         this.user = user;
         this.hash = hash;
-            }
+    }
 
     public User getUser() {
         return user;

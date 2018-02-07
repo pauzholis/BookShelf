@@ -1,4 +1,4 @@
-package ru.testproject.bookshelf.service.Impl;
+package ru.testproject.bookshelf.service.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +22,6 @@ import java.util.UUID;
 
 import static org.springframework.transaction.annotation.Propagation.REQUIRES_NEW;
 
-
 @Scope(proxyMode = ScopedProxyMode.INTERFACES)
 @Service
 public class UserServiceImpl implements UserService {
@@ -38,36 +37,53 @@ public class UserServiceImpl implements UserService {
         this.notificationDao = notificationDao;
     }
 
-
+    /**
+     * Получить пользователя по id
+     */
     @Override
     @Transactional
     public User getUserById(long id) {
         return userDao.findOne(id);
     }
 
+    /**
+     * Получить пользователя по электронной почте
+     */
     @Override
     @Transactional
     public User getUserByEmail(String email) {
         return userDao.getUserByEmail(email);
     }
 
+    /**
+     * Получить всех пользователей
+     */
     @Override
     @Transactional
     public List<User> getAllUsers() {
         return userDao.findAll();
     }
 
+    /**
+     * Удалить пользователя
+     */
     @Override
     @Transactional
     public void remove(String email) {
         userDao.deleteByEmail(email);
     }
 
+    /**
+     * Сохранить нового пользователя
+     */
     @Transactional
     public void save(User user) {
         userDao.save(user);
     }
 
+    /**
+     * Генерация кода активации
+     */
     private String generateActivationCode() {
         return UUID.randomUUID().toString();
     }
@@ -79,14 +95,14 @@ public class UserServiceImpl implements UserService {
     private void createNotification(User user, String activationCode) {
         Date currentDate = new Date();
         Notification notification = new Notification(Channel.EMAIL, currentDate,
-                user.getEmail(), String.format(ACTIVATION_URL,ACTIVATION_MESSAGE, activationCode));
+                user.getEmail(), String.format(ACTIVATION_URL, ACTIVATION_MESSAGE, activationCode));
         notificationDao.save(notification);
     }
 
     @Override
     @Transactional(propagation = REQUIRES_NEW)
     public void registerUser(String email, String password) {
-        User user = new User(email,password);
+        User user = new User(email, password);
         String activationCode = generateActivationCode();
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         UserActivation userActivation = createUserActivation(user, activationCode);

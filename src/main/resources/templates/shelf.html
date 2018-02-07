@@ -11,7 +11,7 @@
             <th>Name</th>
             <th>Description</th>
         </tr>
-        <tr th:each ="shelfView : ${shelfView}">
+        <tr th:each="shelfView : ${shelfView}">
             <td th:utext="${shelfView.name}">...</td>
             <td th:utext="${shelfView.description}">...</td>
             <td>
@@ -23,5 +23,9 @@
         </tr>
     </table>
 </div>
+<h2>Add Shelf</h2>
+<form action="shelf/addShelf">
+    <button type="submit">Add Shelf</button>
+</form>
 </body>
 </html>
