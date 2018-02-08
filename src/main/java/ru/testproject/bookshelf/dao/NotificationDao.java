@@ -7,5 +7,5 @@ public interface NotificationDao extends JpaRepository<Notification, Long> {
     /**
      * Получить сообщение по адресу
      */
-    Notification findByAdress(String email);
+    Notification findByAdress(String address);
 }

@@ -1,5 +1,6 @@
 package ru.testproject.bookshelf.controller;
 
+import org.slf4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,10 +13,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static org.slf4j.LoggerFactory.getLogger;
+
 @Controller
 public class UploadController {
-
+    //Временное решение
     private static String UPLOADED_FOLDER = "C://temp//";
+
+    private static final Logger logger = getLogger(UploadController.class);
 
     /**
      * Страница загрузки файла книги
@@ -42,7 +47,7 @@ public class UploadController {
             redirectAttributes.addFlashAttribute("message",
                     "You successfully uploaded '" + file.getOriginalFilename() + "'");
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("An error occurred", e);
         }
         return "redirect:/uploadStatus";
     }
