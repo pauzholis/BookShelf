@@ -20,10 +20,6 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class BookController {
     private final BookService bookService;
 
-    private static String UPLOADED_FOLDER = "C://temp//";
-
-    private static final Logger logger = getLogger(BookController.class);
-
     @Autowired
     public BookController(BookService bookService) {
         this.bookService = bookService;

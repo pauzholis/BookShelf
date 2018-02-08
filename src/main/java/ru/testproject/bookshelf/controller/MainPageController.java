@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainPageController {
     @RequestMapping(value = {"/"})
     public String index() {
-        return "/showUploadBookPage";
+        return "/index";
     }
 }

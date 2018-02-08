@@ -10,11 +10,9 @@
 
 ```shell
 mvn spring-boot:run
-```
-Программа отвечает на http запросы.
-
-```shell
-http://localhost:8889/ # prints "Ping, Banks, Clients, Payment Orders"
+http://localhost:8080/
+http://localhost:8080/book
+http://localhost:8080/shelf
 ```
 
 При нажатии кнопок происходит вывод соответствующей информации.
