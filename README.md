@@ -22,6 +22,6 @@ http://localhost:8080/shelf
 „тобы продолжить разрабатывать данный проект:
 
 ```shell
-git clone https://github.com/pauzholis/Bookshelf
-cd Bookshelf/
+git clone https://github.com/pauzholis/Book_shelf
+cd Book_shelf/
 ```
