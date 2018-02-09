@@ -5,6 +5,9 @@
     <title>Add Book</title>
 </head>
 <body>
+
+
+
 <h1>Add a Book:</h1>
 
 
@@ -27,25 +30,31 @@
 
     <div class="form-group">
         <label>ISBN</label>
-        <input type="text" th:field="*{isbn}"/>
+        <input type="number" th:field="*{isbn}"/>
     </div>
 
-    <div class="form-group">
-        <label>Пользователь</label>
-        <input type="text" th:field="*{user}"/>
-    </div>
 
-    <div class="form-group">
-        <label>Полка</label>
-        <input type="text" th:field="*{shelf}"/>
-    </div>
+    <!--<table>-->
+        <!--<tr>-->
+            <!--<td>Полка:</td>-->
+            <!--<td>-->
+                <!--<select th:field="*{shelf}">-->
+                    <!--<option value=""> &#45;&#45; </option>-->
+                    <!--<option th:each="shelf : ${shelves}"-->
+                            <!--th:value="${shelf}"-->
+                            <!--th:utext="${shelf.name}"/>-->
+                <!--</select>-->
+
+            <!--</td>-->
+        <!--</tr>-->
+
+        <!--<tr>-->
+            <!--<td><input name="submit" type="submit" value="submit" /></td>-->
+        <!--</tr>-->
+    <!--</table>-->
 
     <button type="submit">Сохранить</button>
 </form>
-<h2>Upload Book</h2>
 
-<form action="/loadBook">
-    <button type="submit">Upload</button>
-</form>
 </body>
 </html>

@@ -1,5 +1,7 @@
 package ru.testproject.bookshelf.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +23,7 @@ public class Book {
     /**
      * Полка на которой стоит книга
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "shelf_id")
     private Shelf shelf;
 
@@ -92,15 +94,15 @@ public class Book {
     public Book() {
     }
 
-    public Book(Shelf shelf, User user, String filePath, String name, String author, String description,
-                Long isbn) {
-        this.shelf = shelf;
-        this.user = user;
-        this.filePath = filePath;
+
+    public Book(String name, String author, String description, Long isbn, User user, String filePath, Shelf shelf) {
         this.name = name;
         this.author = author;
         this.description = description;
         this.isbn = isbn;
+        this.user = user;
+        this.filePath = filePath;
+        this.shelf = shelf;
     }
 
     public Shelf getShelf() {

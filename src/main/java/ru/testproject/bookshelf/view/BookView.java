@@ -6,31 +6,33 @@ import ru.testproject.bookshelf.model.User;
 
 public class BookView {
     public Long id;
-    public Shelf shelf;
-    public User user;
-    public String filePath;
     public String name;
     public String author;
     public String description;
     public Long isbn;
+    public User user;
+    public String filePath;
+    public Shelf shelf;
 
     public BookView() {
     }
 
-    public BookView(Shelf shelf, User user, String filePath, String name, String author, String description, Long isbn) {
-        this.shelf = shelf;
-        this.user = user;
-        this.filePath = filePath;
+    public BookView(String name, String author, String description, Long isbn, User user, /**String filePath,*/ Shelf shelf) {
         this.name = name;
         this.author = author;
         this.description = description;
         this.isbn = isbn;
+        this.user = user;
+        /**this.filePath = filePath;*/
+        this.shelf = shelf;
     }
 
-    @Override
-    public String toString() {
-        return "{shelf:" + shelf + ";user:" + user + ";filePath" + filePath + ";name" + name + ";author" + author +
-                ";description" + description + ";isbn" + isbn + "}";
+    public BookView(String name, String author, String description, Long isbn, Shelf shelf) {
+        this.name = name;
+        this.author = author;
+        this.description = description;
+        this.isbn = isbn;
+        this.shelf = shelf;
     }
 
     public Shelf getShelf() {
@@ -87,6 +89,14 @@ public class BookView {
 
     public void setIsbn(Long isbn) {
         this.isbn = isbn;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
 

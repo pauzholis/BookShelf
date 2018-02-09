@@ -27,6 +27,8 @@ CREATE TABLE book (
 CREATE TABLE shelf (
   id          INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
   COMMENT 'Идентификатор полки',
+  user_id     INT UNSIGNED NOT NULL
+  COMMENT 'Идентификатор пользователя дающего доступ',
   name        VARCHAR(255) NOT NULL
   COMMENT 'Название полки',
   description LONGTEXT     NOT NULL,

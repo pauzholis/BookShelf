@@ -31,7 +31,13 @@ public class ShelfServiceImpl implements ShelfService {
     @Transactional
     public ShelfView getShelf(Long id) {
         Shelf shelf = shelfDao.findOne(id);
-        return new ShelfView(shelf.getName(), shelf.getDescription());
+        ShelfView newShelfView = new ShelfView();
+        newShelfView.id = shelf.getId();
+        newShelfView.name = shelf.getName();
+        newShelfView.description = shelf.getDescription();
+        newShelfView.version = shelf.getVersion();
+
+        return newShelfView;
     }
 
     /**
@@ -58,6 +64,8 @@ public class ShelfServiceImpl implements ShelfService {
     @Transactional
     public void save(ShelfView view) {
         Shelf shelf = new Shelf(view.getName(), view.getDescription());
+        shelf.setId(view.id);
+        shelf.setVersion(view.version);
         shelfDao.save(shelf);
     }
 

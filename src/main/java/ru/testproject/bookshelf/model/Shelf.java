@@ -1,5 +1,7 @@
 package ru.testproject.bookshelf.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -48,6 +50,7 @@ public class Shelf {
     public Shelf() {
     }
 
+
     public Shelf(String name, String description) {
         this.name = name;
         this.description = description;
@@ -79,5 +82,17 @@ public class Shelf {
 
     public void setBook(Set<Book> book) {
         this.book = book;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }

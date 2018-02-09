@@ -5,6 +5,7 @@ public class ShelfView {
     public Long id;
     public String name;
     public String description;
+    public Integer version;
 
     public ShelfView() {
     }
@@ -28,5 +29,21 @@ public class ShelfView {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }

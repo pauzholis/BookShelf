@@ -1,12 +1,18 @@
 package ru.testproject.bookshelf.service.impl;
 
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.testproject.bookshelf.dao.BookDao;
+import ru.testproject.bookshelf.dao.ShelfDao;
+import ru.testproject.bookshelf.dao.UserDao;
 import ru.testproject.bookshelf.model.Book;
+import ru.testproject.bookshelf.model.Shelf;
 import ru.testproject.bookshelf.service.BookService;
 import ru.testproject.bookshelf.view.BookView;
 
@@ -14,14 +20,21 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static org.slf4j.LoggerFactory.getLogger;
+
 @Service
 @Scope(proxyMode = ScopedProxyMode.INTERFACES)
 public class BookServiceImpl implements BookService {
+    private static final Logger logger = getLogger(BookServiceImpl.class);
     private final BookDao bookDao;
+    private final UserDao userDao;
+    private  final ShelfDao shelfDao;
 
     @Autowired
-    public BookServiceImpl(BookDao bookDao) {
+    public BookServiceImpl(BookDao bookDao, UserDao userDao, ShelfDao shelfDao) {
         this.bookDao = bookDao;
+        this.userDao = userDao;
+        this.shelfDao = shelfDao;
     }
 
     /**
@@ -31,8 +44,8 @@ public class BookServiceImpl implements BookService {
     @Transactional
     public BookView getBook(Long id) {
         Book book = bookDao.findOne(id);
-        return new BookView(book.getShelf(), book.getUser(), book.getFilePath(), book.getName(), book.getAuthor(),
-                book.getDescription(), book.getIsbn());
+        return new BookView(book.getName(), book.getAuthor(), book.getDescription(), book.getIsbn(), book.getUser(),
+                /**book.getFilePath(),*/book.getShelf());
     }
 
     /**
@@ -62,9 +75,14 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public void update(BookView view) {
-        Book book = new Book(view.getShelf(), view.getUser(), view.getFilePath(), view.getName(), view.getAuthor(),
-                view.getDescription(), view.getIsbn());
+        User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = user.getUsername();
+        Shelf shelf = shelfDao.findOne(view.getShelf().getId());
+
+
+        Book book = new Book(view.getName(), view.getAuthor(), "description", view.getIsbn(), userDao.getUserByEmail(userName), "filePath", shelf);
         bookDao.save(book);
+        logger.info("Book add as " + book);
     }
 
     /**
