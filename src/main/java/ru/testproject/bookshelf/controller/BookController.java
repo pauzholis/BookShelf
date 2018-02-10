@@ -13,6 +13,7 @@ import ru.testproject.bookshelf.model.Book;
 import ru.testproject.bookshelf.model.Shelf;
 import ru.testproject.bookshelf.model.User;
 import ru.testproject.bookshelf.service.BookService;
+import ru.testproject.bookshelf.service.BookUploadService;
 import ru.testproject.bookshelf.service.FileUploadService;
 import ru.testproject.bookshelf.service.ShelfService;
 import ru.testproject.bookshelf.view.BookView;
@@ -32,12 +33,15 @@ public class BookController {
     private final BookService bookService;
     private final ShelfService shelfService;
     private final FileUploadService fileUploadService;
+    private final BookUploadService bookUploadService;
 
     @Autowired
-    public BookController(BookService bookService, ShelfService shelfService, FileUploadService fileUploadService) {
+    public BookController(BookService bookService, ShelfService shelfService, FileUploadService fileUploadService,
+                          BookUploadService bookUploadService) {
         this.bookService = bookService;
         this.shelfService = shelfService;
         this.fileUploadService = fileUploadService;
+        this.bookUploadService = bookUploadService;
     }
 
     @RequestMapping("book")
@@ -78,6 +82,8 @@ public class BookController {
         Long isbn = bookView.getIsbn();
         BookView newBook = new BookView(name, author, description, isbn, filePath, shelf);
         bookService.update(newBook);
+        bookUploadService.createBookPage(filePath);
+
         return "redirect:/book";
     }
 }
