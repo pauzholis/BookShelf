@@ -10,6 +10,7 @@ public interface ShelfDao extends JpaRepository<Shelf, Long> {
      * Получить все полки
      */
     List<Shelf> findAll();
+    Shelf findByName(String name);
 }
 
 

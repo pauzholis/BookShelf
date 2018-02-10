@@ -40,6 +40,11 @@ public class ShelfServiceImpl implements ShelfService {
         return newShelfView;
     }
 
+    @Override
+    public Shelf getShelfByName(String name) {
+        return shelfDao.findByName(name);
+    }
+
     /**
      * Получить все полки
      */

@@ -25,7 +25,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 @Controller
 @RequestMapping(value = "/")
 public class BookController {
-private static Logger logger = getLogger(BookController.class);
+    private static Logger logger = getLogger(BookController.class);
 
     private final BookService bookService;
     private final ShelfService shelfService;
@@ -61,18 +61,14 @@ private static Logger logger = getLogger(BookController.class);
      */
     @RequestMapping(value = "book/addBook/submit", method = RequestMethod.POST)
     public String update(@ModelAttribute BookView bookView) {
-        ShelfView shelf = shelfService.getShelf(1L);
-        Shelf newShelf = new Shelf();
-        newShelf.setId(shelf.id);
-        newShelf.setName(shelf.name);
-        newShelf.setDescription(shelf.description);
-        newShelf.setVersion(shelf.version);
-        /**String filePath = bookView.getFilePath();*/
+
+        Shelf shelf = shelfService.getShelfByName(bookView.getShelfName());
+        String filePath = bookView.getFilePath();
         String name = bookView.getName();
         String author = bookView.getAuthor();
         String description = bookView.getDescription();
         Long isbn = bookView.getIsbn();
-        BookView newBook = new BookView(name, author, description, isbn/**filePath,*/, newShelf);
+        BookView newBook = new BookView(name, author, description, isbn, filePath, shelf);
         bookService.update(newBook);
         return "redirect:/book";
     }

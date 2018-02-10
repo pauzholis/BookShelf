@@ -13,26 +13,28 @@ public class BookView {
     public User user;
     public String filePath;
     public Shelf shelf;
+    public String shelfName;
 
     public BookView() {
     }
 
-    public BookView(String name, String author, String description, Long isbn, User user, /**String filePath,*/ Shelf shelf) {
+    public BookView(String name, String author, String description, Long isbn, User user, String filePath, Shelf shelf) {
         this.name = name;
         this.author = author;
         this.description = description;
         this.isbn = isbn;
         this.user = user;
-        /**this.filePath = filePath;*/
+        this.filePath = filePath;
         this.shelf = shelf;
     }
 
-    public BookView(String name, String author, String description, Long isbn, Shelf shelf) {
+    public BookView(String name, String author, String description, Long isbn,String filePath, Shelf shelf) {
         this.name = name;
         this.author = author;
         this.description = description;
         this.isbn = isbn;
         this.shelf = shelf;
+        this.filePath = filePath;
     }
 
     public Shelf getShelf() {
@@ -97,6 +99,14 @@ public class BookView {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getShelfName() {
+        return shelfName;
+    }
+
+    public void setShelfName(String shelfName) {
+        this.shelfName = shelfName;
     }
 }
 

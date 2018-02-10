@@ -28,7 +28,7 @@ public class BookServiceImpl implements BookService {
     private static final Logger logger = getLogger(BookServiceImpl.class);
     private final BookDao bookDao;
     private final UserDao userDao;
-    private  final ShelfDao shelfDao;
+    private final ShelfDao shelfDao;
 
     @Autowired
     public BookServiceImpl(BookDao bookDao, UserDao userDao, ShelfDao shelfDao) {
@@ -45,7 +45,7 @@ public class BookServiceImpl implements BookService {
     public BookView getBook(Long id) {
         Book book = bookDao.findOne(id);
         return new BookView(book.getName(), book.getAuthor(), book.getDescription(), book.getIsbn(), book.getUser(),
-                /**book.getFilePath(),*/book.getShelf());
+                book.getFilePath(),book.getShelf());
     }
 
     /**
@@ -77,10 +77,8 @@ public class BookServiceImpl implements BookService {
     public void update(BookView view) {
         User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String userName = user.getUsername();
-        Shelf shelf = shelfDao.findOne(view.getShelf().getId());
-
-
-        Book book = new Book(view.getName(), view.getAuthor(), "description", view.getIsbn(), userDao.getUserByEmail(userName), "filePath", shelf);
+                Book book = new Book(view.getName(), view.getAuthor(), view.getDescription(), view.getIsbn(),
+                userDao.getUserByEmail(userName), "filePath", view.getShelf());
         bookDao.save(book);
         logger.info("Book add as " + book);
     }
