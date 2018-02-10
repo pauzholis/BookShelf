@@ -4,19 +4,21 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.testproject.bookshelf.dao.BookDao;
 import ru.testproject.bookshelf.dao.ShelfDao;
 import ru.testproject.bookshelf.model.Book;
 import ru.testproject.bookshelf.model.Shelf;
 import ru.testproject.bookshelf.model.User;
 import ru.testproject.bookshelf.service.BookService;
+import ru.testproject.bookshelf.service.FileUploadService;
 import ru.testproject.bookshelf.service.ShelfService;
 import ru.testproject.bookshelf.view.BookView;
 import ru.testproject.bookshelf.view.ShelfView;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -29,13 +31,14 @@ public class BookController {
 
     private final BookService bookService;
     private final ShelfService shelfService;
+    private final FileUploadService fileUploadService;
 
     @Autowired
-    public BookController(BookService bookService, ShelfService shelfService) {
+    public BookController(BookService bookService, ShelfService shelfService, FileUploadService fileUploadService) {
         this.bookService = bookService;
         this.shelfService = shelfService;
+        this.fileUploadService = fileUploadService;
     }
-
 
     @RequestMapping("book")
     public String getAllBooks(Model model) {
@@ -47,12 +50,8 @@ public class BookController {
      * Страница добавления книги
      */
     @RequestMapping(value = {"book/addBook"}, method = RequestMethod.GET)
-    public String showAddBookPage(Model modelBook, Model modelShelf) {
+    public String showAddBookPage(Model modelBook) {
         modelBook.addAttribute("bookView", new BookView());
-
-        List<ShelfView> shelves = shelfService.getAllShelves();
-        modelShelf.addAttribute("shelves", shelves);
-
         return "addBook";
     }
 
@@ -60,10 +59,19 @@ public class BookController {
      * Добавление новой книги
      */
     @RequestMapping(value = "book/addBook/submit", method = RequestMethod.POST)
-    public String update(@ModelAttribute BookView bookView) {
+    public String update(@ModelAttribute BookView bookView, @RequestParam("file") MultipartFile file) {
+        String fileName = file.getOriginalFilename();
+        String filePath = "";
 
+        if (file.isEmpty()) {
+            return "redirect:loadBook";
+        }
+        try {
+            filePath = fileUploadService.uploadFile(file.getBytes(), file.getOriginalFilename());
+        } catch (IOException e) {
+            logger.error("An error occurred", e);
+        }
         Shelf shelf = shelfService.getShelfByName(bookView.getShelfName());
-        String filePath = bookView.getFilePath();
         String name = bookView.getName();
         String author = bookView.getAuthor();
         String description = bookView.getDescription();

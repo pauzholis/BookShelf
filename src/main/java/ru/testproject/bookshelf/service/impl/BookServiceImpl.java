@@ -12,7 +12,6 @@ import ru.testproject.bookshelf.dao.BookDao;
 import ru.testproject.bookshelf.dao.ShelfDao;
 import ru.testproject.bookshelf.dao.UserDao;
 import ru.testproject.bookshelf.model.Book;
-import ru.testproject.bookshelf.model.Shelf;
 import ru.testproject.bookshelf.service.BookService;
 import ru.testproject.bookshelf.view.BookView;
 
@@ -45,7 +44,7 @@ public class BookServiceImpl implements BookService {
     public BookView getBook(Long id) {
         Book book = bookDao.findOne(id);
         return new BookView(book.getName(), book.getAuthor(), book.getDescription(), book.getIsbn(), book.getUser(),
-                book.getFilePath(),book.getShelf());
+                book.getFilePath(), book.getShelf());
     }
 
     /**
@@ -77,8 +76,8 @@ public class BookServiceImpl implements BookService {
     public void update(BookView view) {
         User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String userName = user.getUsername();
-                Book book = new Book(view.getName(), view.getAuthor(), view.getDescription(), view.getIsbn(),
-                userDao.getUserByEmail(userName), "filePath", view.getShelf());
+        Book book = new Book(view.getName(), view.getAuthor(), view.getDescription(), view.getIsbn(),
+                userDao.getUserByEmail(userName), view.getFilePath(), view.getShelf());
         bookDao.save(book);
         logger.info("Book add as " + book);
     }

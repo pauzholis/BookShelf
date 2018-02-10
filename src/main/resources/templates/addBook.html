@@ -5,13 +5,16 @@
     <title>Add Book</title>
 </head>
 <body>
+<h1>Select book to download</h1>
+
+<form method="POST" action="/book/addBook/submit" enctype="multipart/form-data">
+    <input type="file" name="file"/><br/><br/>
 
 
+<h2>Add a Book:</h2>
 
-<h1>Add a Book:</h1>
 
-
-<form action="#" th:action="@{addBook/submit}"
+<form action="#" th:action="@{addBook/submit} "
       th:object="${bookView}" method="POST">
     <div class="form-group">
         <label>Наименование</label>
@@ -37,26 +40,9 @@
         <label>Полка</label>
         <input type="text" th:field="*{shelfName}"/>
     </div>
-       <!--<table>-->
-        <!--<tr>-->
-            <!--<td>Полка:</td>-->
-            <!--<td>-->
-                <!--<select th:field="*{shelf}">-->
-                    <!--<option value=""> &#45;&#45; </option>-->
-                    <!--<option th:each="shelf : ${shelves}"-->
-                            <!--th:value="${shelf}"-->
-                            <!--th:utext="${shelf.name}"/>-->
-                <!--</select>-->
-
-            <!--</td>-->
-        <!--</tr>-->
-
-        <!--<tr>-->
-            <!--<td><input name="submit" type="submit" value="submit" /></td>-->
-        <!--</tr>-->
-    <!--</table>-->
 
     <button type="submit">Сохранить</button>
+</form>
 </form>
 
 </body>

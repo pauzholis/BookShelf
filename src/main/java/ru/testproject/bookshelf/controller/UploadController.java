@@ -22,44 +22,44 @@ private static final Logger logger = getLogger(UploadController.class);
         this.fileUploadService = fileUploadService;
     }
 
-    /**
-     * Страница загрузки файла книги
-     */
-    @GetMapping("/loadBook")
-    public String showUploadBookPage() {
-        return "upload";
-    }
-
-    /**
-     * Загрузка файла
-     */
-    @PostMapping("/upload")
-    public String singleFileUpload(@RequestParam("file") MultipartFile file,
-                                   RedirectAttributes redirectAttributes ) throws IOException {
-        String fileName = file.getOriginalFilename();
-        String filePath;
-        if(file.isEmpty()){
-            redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
-            return "redirect:uploadStatus";
-        }
-        try {
-            filePath = fileUploadService.uploadFile(file.getBytes(),file.getOriginalFilename());
-            redirectAttributes.addFlashAttribute("message",
-                    "You successfully uploaded '" + file.getOriginalFilename() + "'");
-        } catch (IOException e) {
-            logger.error("An error occurred", e);
-        }
-
-        return "redirect:/uploadStatus";
-    }
-
-    /**
-     * Статус загрузки книги
-     */
-    @GetMapping("/uploadStatus")
-    public String uploadStatus() {
-        return "uploadStatus";
-    }
+//    /**
+//     * Страница загрузки файла книги
+//     */
+//    @GetMapping("/loadBook")
+//    public String showUploadBookPage() {
+//        return "upload";
+//    }
+//
+//    /**
+//     * Загрузка файла
+//     */
+//    @PostMapping("/upload")
+//    public String singleFileUpload(@RequestParam("file") MultipartFile file,
+//                                   RedirectAttributes redirectAttributes ) throws IOException {
+//        String fileName = file.getOriginalFilename();
+//        String filePath;
+//        if(file.isEmpty()){
+//            redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
+//            return "redirect:uploadStatus";
+//        }
+//        try {
+//            filePath = fileUploadService.uploadFile(file.getBytes(),file.getOriginalFilename());
+//            redirectAttributes.addFlashAttribute("message",
+//                    "You successfully uploaded '" + file.getOriginalFilename() + "'");
+//        } catch (IOException e) {
+//            logger.error("An error occurred", e);
+//        }
+//
+//        return "redirect:/uploadStatus";
+//    }
+//
+//    /**
+//     * Статус загрузки книги
+//     */
+//    @GetMapping("/uploadStatus")
+//    public String uploadStatus() {
+//        return "uploadStatus";
+//    }
 
 }
 
