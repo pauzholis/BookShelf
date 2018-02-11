@@ -32,7 +32,7 @@ public class Notification {
     private Date date;
 
     /**
-     * Адресс электронной почты
+     * Адресс для отправки сообщения
      */
     @Column(name = "adress")
     private String adress;

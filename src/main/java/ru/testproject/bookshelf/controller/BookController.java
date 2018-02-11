@@ -63,7 +63,7 @@ public class BookController {
      * Добавление новой книги
      */
     @RequestMapping(value = "book/addBook/submit", method = RequestMethod.POST)
-    public String update(@ModelAttribute BookView bookView, @RequestParam("file") MultipartFile file) {
+    public String update(@ModelAttribute BookView bookView, @RequestParam("file") MultipartFile file) throws IOException {
         String fileName = file.getOriginalFilename();
         String filePath = "";
 

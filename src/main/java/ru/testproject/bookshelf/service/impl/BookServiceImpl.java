@@ -74,7 +74,7 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public void update(BookView view) {
-        User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String userName = user.getUsername();
         Book book = new Book(view.getName(), view.getAuthor(), view.getDescription(), view.getIsbn(),
                 userDao.getUserByEmail(userName), view.getFilePath(), view.getShelf());

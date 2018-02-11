@@ -112,7 +112,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void isUserActive(String hash) {
+    public void selectUserActive(String hash) {
         List<User> userList = userDao.findAll();
         for (User user : userList) {
             if (user.getUserActivation().getHash().equals(hash)) {

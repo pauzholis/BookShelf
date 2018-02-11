@@ -120,7 +120,8 @@ CREATE TABLE access_request (
   COMMENT 'Сообщение для запроса доступа'
 );
 
--- Таблица сообщений для активации профиля
+--
+-- Таблица сообщений
 --
 CREATE TABLE notification (
   id          INT UNSIGNED          NOT NULL AUTO_INCREMENT PRIMARY KEY

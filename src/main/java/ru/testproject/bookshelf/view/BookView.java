@@ -28,7 +28,7 @@ public class BookView {
         this.shelf = shelf;
     }
 
-    public BookView(String name, String author, String description, Long isbn,String filePath, Shelf shelf) {
+    public BookView(String name, String author, String description, Long isbn, String filePath, Shelf shelf) {
         this.name = name;
         this.author = author;
         this.description = description;

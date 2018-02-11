@@ -1,8 +1,8 @@
 package ru.testproject.bookshelf.service.impl;
 
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.testproject.bookshelf.dao.BookDao;
 import ru.testproject.bookshelf.model.Book;
 import ru.testproject.bookshelf.model.Page;
@@ -16,11 +16,8 @@ import java.nio.charset.Charset;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.slf4j.LoggerFactory.getLogger;
-
 @Service
 public class BookUploadServiceImpl implements BookUploadService {
-    private static final Logger logger = getLogger(BookUploadServiceImpl.class);
     private final BookDao bookDao;
 
     @Autowired
@@ -29,26 +26,33 @@ public class BookUploadServiceImpl implements BookUploadService {
     }
 
     @Override
-    public void createBookPage(String filePath) {
-        int boarder = 6;
-        try {
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(
-                            new FileInputStream(filePath), Charset.forName("UTF-8")));
-            String strLine;
-            for (int i = 1; i <= boarder; i++) {
-                strLine = reader.readLine();
-                if (strLine != null) {
-                    Book book = bookDao.findByFilePath(filePath);
-                    Set<Page> pages = book.getPage();
-                    pages.add(new Page(book, i, strLine));
-                    bookDao.save(book);
-                } else {
+    @Transactional
+    public void createBookPage(String filePath) throws IOException {
+        Book book = bookDao.findByFilePath(filePath);
+        int border = 50;
+        int pageNumber = 1;
+        Set<Page> pages = new HashSet<>();
+
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(
+                new FileInputStream(filePath), Charset.forName("UTF-8")))) {
+            String strLine = "";
+            while (true) {
+                StringBuilder pageContent = new StringBuilder();
+                if (strLine == null) {
                     break;
                 }
+                for (int i = 1; i <= border; i++) {
+                    strLine = reader.readLine();
+                    if (strLine == null) {
+                        break;
+                    }
+                    pageContent.append(strLine);
+                    pageContent.append("\n");
+                }
+                pages.add(new Page(book, pageNumber++, pageContent.toString()));
             }
-        } catch (IOException e) {
-            logger.info("something is wrong with the file path " + filePath);
+            book.setPage(pages);
+            bookDao.save(book);
         }
     }
 }

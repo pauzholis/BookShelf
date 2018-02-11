@@ -1,7 +1,5 @@
 package ru.testproject.bookshelf.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -35,7 +33,7 @@ public class Book {
     private User user;
 
     /**
-     * Место расположения книги
+     * Адрес хранения файла книги
      */
     @Column(name = "file_path")
     private String filePath;
@@ -73,7 +71,7 @@ public class Book {
     /**
      * Список страниц
      */
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = CascadeType.ALL)
     private Set<Page> page = new HashSet<Page>();
 
     /**

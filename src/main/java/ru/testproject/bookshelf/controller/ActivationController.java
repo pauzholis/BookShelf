@@ -17,8 +17,8 @@ public class ActivationController {
     }
 
     @RequestMapping(value = "/activation/{hash}", method = RequestMethod.GET)
-    public String notification(@PathVariable("hash") String hash) {
-        userService.isUserActive(hash);
+    public String checkHashValid(@PathVariable("hash") String hash) {
+        userService.selectUserActive(hash);
         return "/user";
     }
 }

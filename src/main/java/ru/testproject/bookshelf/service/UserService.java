@@ -39,5 +39,5 @@ public interface UserService {
     /**
      * Установка активации пользователя
      */
-    void isUserActive(String email);
+    void selectUserActive(String email);
 }

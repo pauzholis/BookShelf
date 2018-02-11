@@ -17,5 +17,8 @@ public interface BookDao extends JpaRepository<Book, Long> {
      */
     List<Book> getAllByName(String name, User user);
 
-    Book findByFilePath (String filePath);
+    /**
+     * Получить книгу по адресу хранения файла
+     */
+    Book findByFilePath(String filePath);
 }
