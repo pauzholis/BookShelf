@@ -49,9 +49,10 @@ public class UserActivation {
     public UserActivation() {
     }
 
-    public UserActivation(User user, String hash) {
+    public UserActivation(User user, String hash,Date activeDate) {
         this.user = user;
         this.hash = hash;
+        this.activeDate = activeDate;
     }
 
     public User getUser() {

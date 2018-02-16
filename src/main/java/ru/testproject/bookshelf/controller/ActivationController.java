@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ru.testproject.bookshelf.service.UserService;
 
 @Controller
+@RequestMapping(value = "/")
 public class ActivationController {
     private final UserService userService;
 
@@ -16,10 +17,10 @@ public class ActivationController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/activation/{hash}", method = RequestMethod.GET)
+    @RequestMapping(value = "activation/{hash}", method = RequestMethod.GET)
     public String checkHashValid(@PathVariable("hash") String hash) {
         userService.selectUserActive(hash);
-        return "/user";
+        return "index";
     }
 }
 

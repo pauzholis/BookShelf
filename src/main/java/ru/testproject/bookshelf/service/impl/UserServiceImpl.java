@@ -25,8 +25,7 @@ import static org.springframework.transaction.annotation.Propagation.REQUIRES_NE
 @Scope(proxyMode = ScopedProxyMode.INTERFACES)
 @Service
 public class UserServiceImpl implements UserService {
-    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
-    private static final String ACTIVATION_URL = "%shttp://localhost:8080/activation?code=%s";
+    private static final String ACTIVATION_URL = "%shttp://localhost:8080/activation/%s";
     private static final String ACTIVATION_MESSAGE = "Для активации вашего аккаунта пройдите по этой ссылке ";
     private final UserDao userDao;
     private final NotificationDao notificationDao;
@@ -88,14 +87,18 @@ public class UserServiceImpl implements UserService {
         return UUID.randomUUID().toString();
     }
 
+    @Transactional
     private UserActivation createUserActivation(User user, String activationCode) {
-        return new UserActivation(user, activationCode);
+        UserActivation userActivation = new UserActivation(user, activationCode, new Date());
+        user.setUserActivation(userActivation);
+        userDao.save(user);
+        return userActivation;
     }
 
-    private void createNotification(User user, String activationCode) {
+    private void createNotification(String addres, String activationCode) {
         Date currentDate = new Date();
         Notification notification = new Notification(Channel.EMAIL, currentDate,
-                user.getEmail(), String.format(ACTIVATION_URL, ACTIVATION_MESSAGE, activationCode));
+                addres, String.format(ACTIVATION_URL, ACTIVATION_MESSAGE, activationCode));
         notificationDao.save(notification);
     }
 
@@ -107,17 +110,18 @@ public class UserServiceImpl implements UserService {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         UserActivation userActivation = createUserActivation(user, activationCode);
         user.setUserActivation(userActivation);
-        createNotification(user, activationCode);
+        createNotification(user.getEmail(), activationCode);
         save(user);
     }
 
     @Override
+    @Transactional
     public void selectUserActive(String hash) {
         List<User> userList = userDao.findAll();
         for (User user : userList) {
-            if (user.getUserActivation().getHash().equals(hash)) {
+            if (user != null && user.getUserActivation().getHash().equals(hash)) {
                 user.setActive(true);
-                save(user);
+                userDao.save(user);
             }
         }
     }

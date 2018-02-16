@@ -5,6 +5,7 @@
 Сервис для работы с книжной полкой. Реализована регистрация и авторизация пользователя. На данный момент можно просмотреть книги, полки, пользователей. Залить книгу.
 
 ## Начало работы
+Для управления базой данных импользуется MySQL. Базу данных "bookshelf" нужно создать отдельно в MySQL Workbench.
 
 Запуск сервиса:
 
@@ -22,6 +23,6 @@ http://localhost:8080/shelf
 Чтобы продолжить разрабатывать данный проект:
 
 ```shell
-git clone https://github.com/pauzholis/Book_shelf
-cd Book_shelf/
+git clone https://github.com/pauzholis/BookShelf
+cd BookShelf/
 ```
